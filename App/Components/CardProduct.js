@@ -1,10 +1,10 @@
 import React, { memo, useContext } from 'react'
 import { TouchableOpacity,Image, View, Text } from 'react-native'
-import styles from './Styles/ListProductStyle'
+import styles from './Styles/CardProduct'
 import { NavigationContext } from "react-navigation"
 import Format from '../Lib/NumberFormat'
 
-const ListProduct = (props) => {
+const CardProduct = (props) => {
   const {item, ...restProps} = props
   const navigation = useContext(NavigationContext)
   const { thumbnail, title, price } = item
@@ -13,11 +13,11 @@ const ListProduct = (props) => {
     <TouchableOpacity activeOpacity={0.9} style={styles.card} {...restProps}>
       <Image source={{ uri: thumbnail }} style={styles.thumb} resizeMode="cover" />
       <View style={styles.content}>
-        <Text style={styles.title}>{title}</Text>
-        <Text style={styles.price}>{'Rp' + new Format().formatMoney(price)}</Text>
+        <Text style={styles.title}>{item?.title}</Text>
+        <Text style={styles.price}>{'Rp' + new Format().formatMoney(item?.price ?? 0)}</Text>
       </View>
     </TouchableOpacity>
   )
 }
 
-export default memo(ListProduct)
+export default memo(CardProduct)
