@@ -8,11 +8,8 @@ target 'CovidApp' do
 
   use_react_native!(:path => config["reactNativePath"])
 
-  pod 'RNGestureHandler', :path => '../node_modules/react-native-gesture-handler'
 
-  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
 
-  pod 'RNI18n', :path => '../node_modules/react-native-i18n'
 
   target 'CovidAppTests' do
     inherit! :complete

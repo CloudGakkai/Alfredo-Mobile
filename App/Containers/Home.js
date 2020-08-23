@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react'
-import { 
-  SafeAreaView, 
-  ActivityIndicator, 
+import {
+  SafeAreaView,
+  ActivityIndicator,
   TouchableOpacity,
-  RefreshControl, 
-  FlatList, 
-  Image, 
-  View, 
-  Text 
+  RefreshControl,
+  FlatList,
+  Image,
+  View,
+  Text
 } from 'react-native'
 import { connect } from "react-redux";
 import ProductsActions from "../Redux/ProductsRedux";
-import ListProduct from '../Components/ListProduct'
+import CardProduct from '../Components/CardProduct'
 
 import styles from './Styles/HomeStyle'
 import HeaderStyle from "../Navigation/Styles/NavigationStyles";
@@ -30,16 +30,18 @@ const Home = props => {
   }
 
   const renderItem = ({ item, index }) => (
-    <ListProduct thumb={{uri: item.thumbnail}} title={item?.title} price={item?.price} press={() => alert('Beli')} />
+    <CardProduct
+      item={item}
+      press={() => alert('Beli')}
+    />
   )
 
   const onEndReached = async (distance) => {
     const { page, lastPage, isLoadMore } = props.products
-    
+
     if (!isLoadMore && (page < lastPage)) {
       const newPage = page + 1
-      
-      console.tron.log("load more running")
+
       props.moreProducts({ params: `?page=${newPage}`, page: newPage })
     }
   }
