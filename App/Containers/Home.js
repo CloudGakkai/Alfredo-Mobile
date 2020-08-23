@@ -18,7 +18,7 @@ import HeaderStyle from "../Navigation/Styles/NavigationStyles";
 import { apply } from '../Lib/OsmiProvider'
 
 const Home = props => {
-  const { products } = props
+  const { products, navigation } = props
   const [refreshing, setRefreshing] = useState(false)
 
   useEffect(() => {
@@ -32,7 +32,7 @@ const Home = props => {
   const renderItem = ({ item, index }) => (
     <CardProduct
       item={item}
-      press={() => alert('Beli')}
+      onPress={() => alert('hello')}
     />
   )
 
@@ -44,6 +44,11 @@ const Home = props => {
 
       props.moreProducts({ params: `?page=${newPage}`, page: newPage })
     }
+  }
+
+  const onPress = (item) => {
+    props.getDetail(item?.slug)
+    navigation.navigate('ProductDetail')
   }
 
   return (
@@ -89,7 +94,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatctToProps = (dispatch) => ({
   getProductsList: value => dispatch(ProductsActions.getProductsRequest(value)),
-  moreProducts: value => dispatch(ProductsActions.moreProductsRequest(value))
+  moreProducts: value => dispatch(ProductsActions.moreProductsRequest(value)),
+  getDetail: value => dispatch(ProductsActions.getDetailRequest(value))
 })
 
 Home.navigationOptions = ({ navigation }) => {

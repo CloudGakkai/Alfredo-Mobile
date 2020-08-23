@@ -7,10 +7,11 @@ import Format from '../Lib/NumberFormat'
 const CardProduct = (props) => {
   const {item, ...restProps} = props
   const navigation = useContext(NavigationContext)
+  const { thumbnail, title, price } = item
 
   return (
     <TouchableOpacity activeOpacity={0.9} style={styles.card} {...restProps}>
-      <Image source={{ uri: item?.thumbnail }} style={styles.thumb} resizeMode="cover" />
+      <Image source={{ uri: thumbnail }} style={styles.thumb} resizeMode="cover" />
       <View style={styles.content}>
         <Text style={styles.title}>{item?.title}</Text>
         <Text style={styles.price}>{'Rp' + new Format().formatMoney(item?.price ?? 0)}</Text>
