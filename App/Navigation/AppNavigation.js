@@ -12,7 +12,6 @@ import styles from './Styles/NavigationStyles'
 
 // Manifest of possible screens
 const PrimaryNav = createStackNavigator({
-  ProductDetail: { screen: ProductDetail },
   Main: {
     screen: BottomNavigation,
     navigationOptions: ({navigation}) => ({
@@ -22,10 +21,10 @@ const PrimaryNav = createStackNavigator({
   Account: { screen: Account },
   Cart: { screen: Cart },
   Products: { screen: Products },
-  Home: { screen: Home }
+  Home: { screen: Home },
+  ProductDetail: { screen: ProductDetail },
 }, {
   // Default config for all screens
-  headerMode: 'none',
   initialRouteName: 'Main',
   navigationOptions: {
     headerStyle: styles.header

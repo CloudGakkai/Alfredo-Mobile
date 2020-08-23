@@ -32,7 +32,7 @@ const Home = props => {
   const renderItem = ({ item, index }) => (
     <CardProduct
       item={item}
-      onPress={() => alert('hello')}
+      onPress={() => navigation.navigate("ProductDetail")}
     />
   )
 
