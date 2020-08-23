@@ -5,12 +5,13 @@ import { NavigationContext } from "react-navigation"
 import Format from '../Lib/NumberFormat'
 
 const ListProduct = (props) => {
-  const {thumb, title, price, press, ...restProps} = props
+  const {item, ...restProps} = props
   const navigation = useContext(NavigationContext)
+  const { thumbnail, title, price } = item
 
   return (
-    <TouchableOpacity onPress={press} activeOpacity={0.9} style={styles.card}>
-      <Image source={thumb} style={styles.thumb} resizeMode="cover" />
+    <TouchableOpacity activeOpacity={0.9} style={styles.card} {...restProps}>
+      <Image source={{ uri: thumbnail }} style={styles.thumb} resizeMode="cover" />
       <View style={styles.content}>
         <Text style={styles.title}>{title}</Text>
         <Text style={styles.price}>{'Rp' + new Format().formatMoney(price)}</Text>

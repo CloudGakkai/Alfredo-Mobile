@@ -16,6 +16,18 @@ export function * getProducts (api, action) {
   }
 }
 
+export function * getDetail (api, action) {
+  const { data } = action
+
+  const response = yield call(api.getDetail, data)
+
+  if (response.ok) {
+    yield put(ProductsActions.getDetailSuccess(response.data.data))
+  } else {
+    yield put(ProductsActions.getDetailFailure(response))
+  }
+}
+
 export function * moreProducts (api, action) {
   const { data } = action
 

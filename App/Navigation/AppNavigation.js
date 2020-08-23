@@ -1,4 +1,5 @@
 import { createAppContainer } from 'react-navigation'
+import ProductDetail from '../Containers/ProductDetail'
 import Account from '../Containers/Account'
 import Cart from '../Containers/Cart'
 import Products from '../Containers/Products'
@@ -11,6 +12,7 @@ import styles from './Styles/NavigationStyles'
 
 // Manifest of possible screens
 const PrimaryNav = createStackNavigator({
+  ProductDetail: { screen: ProductDetail },
   Main: {
     screen: BottomNavigation,
     navigationOptions: ({navigation}) => ({
