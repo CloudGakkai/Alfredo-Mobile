@@ -1,22 +1,37 @@
 import React from 'react'
-import { ScrollView, Text } from 'react-native'
+import { SafeAreaView, ScrollView, View, Text } from 'react-native'
 import { connect } from 'react-redux'
-import styles from './Styles/ProductDetailStyle'
+import ArrowBack from '../Components/ArrowBack'
 
-const ProductDetail = () => {
+import styles from './Styles/ProductDetailStyle'
+import HeaderStyle from '../Navigation/Styles/NavigationStyles'
+
+const ProductDetail = props => {
   return (
-    <ScrollView style={styles.container}>
-      <Text>ProductDetail Container</Text>
-    </ScrollView>
+    <SafeAreaView style={{flex:1}}>
+      <View>
+        <Text>Hello World!</Text>
+      </View>
+    </SafeAreaView>
   )
 }
 
 const mapStateToProps = (state) => ({
-  
+
 })
 
 const mapDispatchToProps = (dispatch) => {
   return {
+  }
+}
+
+ProductDetail.navigationOptions = ({ navigation }) => {
+  const { params = {} } = navigation.state
+
+  return {
+    headerStyle: HeaderStyle.default,
+    headerTitle: 'Product Detail',
+    headerLeft: () => <ArrowBack />
   }
 }
 
