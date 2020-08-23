@@ -39,6 +39,7 @@ const create = (baseURL = 'https://api.alfredo.my.id/api/v1') => {
   //
 
   const getProducts = data => api.get(`/products${data.params}`)
+  const getCategory = data => api.get(`/category`)
 
   // ------
   // STEP 3
@@ -55,6 +56,7 @@ const create = (baseURL = 'https://api.alfredo.my.id/api/v1') => {
   return {
     // a list of the API functions from step 2
     getProducts,
+    getCategory,
     
     api
   }

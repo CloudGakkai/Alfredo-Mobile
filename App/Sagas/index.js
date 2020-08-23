@@ -7,13 +7,15 @@ import DebugConfig from '../Config/DebugConfig'
 
 import { StartupTypes } from '../Redux/StartupRedux'
 import { GithubTypes } from '../Redux/GithubRedux'
-import { ProductsTypes } from "../Redux/ProductsRedux";
+import { ProductsTypes } from "../Redux/ProductsRedux"
+import { CategoryTypes } from "../Redux/CategoryRedux"
 
 /* ------------- Sagas ------------- */
 
 import { startup } from './StartupSagas'
 import { getUserAvatar } from './GithubSagas'
-import { getProducts, moreProducts } from "./ProductsSagas";
+import { getProducts, moreProducts } from "./ProductsSagas"
+import { getCategory } from "./CategorySagas";
 
 /* ------------- API ------------- */
 
@@ -30,5 +32,6 @@ export default function * root () {
 
     takeLatest(ProductsTypes.GET_PRODUCTS_REQUEST, getProducts, api),
     takeLatest(ProductsTypes.MORE_PRODUCTS_REQUEST, moreProducts, api),
+    takeLatest(CategoryTypes.GET_CATEGORY_REQUEST, getCategory, api)
   ])
 }
