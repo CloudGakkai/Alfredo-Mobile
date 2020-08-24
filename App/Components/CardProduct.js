@@ -15,6 +15,9 @@ const CardProduct = (props) => {
       <View style={styles.content}>
         <Text style={styles.title}>{item?.title}</Text>
         <Text style={styles.price}>{'Rp' + new Format().formatMoney(item?.price ?? 0)}</Text>
+        <TouchableOpacity activeOpacity={0.9} style={styles.btnBuy}>
+          <Text style={styles.btnBuyLabel}>Detail</Text>
+        </TouchableOpacity>
       </View>
     </TouchableOpacity>
   )

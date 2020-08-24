@@ -32,7 +32,7 @@ const Home = props => {
   const renderItem = ({ item, index }) => (
     <CardProduct
       item={item}
-      onPress={() => navigation.navigate("ProductDetail")}
+      onPress={() => onPress()}
     />
   )
 
@@ -48,7 +48,7 @@ const Home = props => {
 
   const onPress = (item) => {
     props.getDetail(item?.slug)
-    navigation.navigate('ProductDetail')
+    navigation.navigate('ProductDetail', {item})
   }
 
   return (
