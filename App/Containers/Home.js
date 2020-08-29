@@ -32,11 +32,11 @@ const Home = props => {
   const renderItem = ({ item, index }) => (
     <CardProduct
       item={item}
-      onPress={() => onPress()}
+      onPress={() => onPress(item)}
     />
   )
 
-  const onEndReached = async (distance) => {
+  const onEndReached = async() => {
     const { page, lastPage, isLoadMore } = props.products
 
     if (!isLoadMore && (page < lastPage)) {
@@ -47,12 +47,12 @@ const Home = props => {
   }
 
   const onPress = (item) => {
-    props.getDetail(item?.slug)
-    navigation.navigate('ProductDetail', {item})
+    props.getDetail('/' + item?.slug)
+    navigation.navigate('ProductDetail', {title: item.title, stock: item.stock})
   }
 
   return (
-    <SafeAreaView style={apply('flex')}>
+    <SafeAreaView style={apply('flex bg-gray-500')}>
       {products?.fetching ? (
         <View style={styles.emptyState}>
           <ActivityIndicator size="large" color={apply('gray-900')} />
@@ -63,12 +63,15 @@ const Home = props => {
           keyExtractor={(item, index) => index.toString()}
           showsVerticalScrollIndicator={false}
           initialNumToRender={8}
-          contentContainerStyle={apply('p-5 bg-gray-500')}
+          contentContainerStyle={apply('bg-gray-500')}
           renderItem={renderItem}
           refreshControl={
             <RefreshControl refreshing={refreshing} onRefresh={() => pullRefresh()} />
           }
           onEndReached={onEndReached}
+          horizontal={false}
+          numColumns={2}
+          key={2}
           onEndReachedThreshold={0.1}
           ListEmptyComponent={() =>
             <View style={styles.emptyState}>
@@ -89,10 +92,11 @@ const Home = props => {
 }
 
 const mapStateToProps = (state) => ({
-  products: state.products.list
+  products: state.products.list,
+  detail: state.products.detail
 })
 
-const mapDispatctToProps = (dispatch) => ({
+const mapDispatchToProps = (dispatch) => ({
   getProductsList: value => dispatch(ProductsActions.getProductsRequest(value)),
   moreProducts: value => dispatch(ProductsActions.moreProductsRequest(value)),
   getDetail: value => dispatch(ProductsActions.getDetailRequest(value))
@@ -107,4 +111,4 @@ Home.navigationOptions = ({ navigation }) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatctToProps)(Home)
+export default connect(mapStateToProps, mapDispatchToProps)(Home)

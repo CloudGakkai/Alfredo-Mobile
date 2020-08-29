@@ -1,41 +1,93 @@
-import React from 'react'
-import { SafeAreaView, ActivityIndicator, ScrollView, Image, View, Text } from 'react-native'
+import React, { useState, useEffect } from 'react'
+import {
+  KeyboardAvoidingView,
+  SafeAreaView,
+  ActivityIndicator,
+  ScrollView,
+  TextInput,
+  Dimensions,
+  Image,
+  View,
+  Text
+} from 'react-native'
 import { connect } from 'react-redux'
 import ArrowBack from '../Components/ArrowBack'
+import Button from '../Components/Button'
+import Format from '../Lib/NumberFormat'
 
 import styles from './Styles/ProductDetailStyle'
 import HeaderStyle from '../Navigation/Styles/NavigationStyles'
 import { apply } from '../Lib/OsmiProvider'
 
+const { width } = Dimensions.get('window')
+
 const ProductDetail = props => {
-  const { detail } = props
+  const { detail, navigation } = props
   const { data } = detail
+  const stocks = navigation.getParam('stock', 0)
+  const { formatMoney } = new Format()
+
+  //State
+  const [stock, setStock] = useState(stocks)
+  const [qty, setQty] = useState(1)
+
+  onBuy = () => {}
+
+  onMin = () => {
+    if(qty > stock) {
+      setQty(stock)
+    } else if(qty <= 1) {
+      setQty(1)
+    } else {
+      setQty(qty-1)
+    }
+  }
+
+  onPlus = () => {
+    qty < stock ? setQty(qty+1) : setQty(stock)
+  }
+
+  onChange = (value) => {
+    Number(value) > stock ? setQty(stock) : setQty(Number(value))
+  }
 
   return (
-    <SafeAreaView style={{flex:1}}>
+    <SafeAreaView style={apply('bg-white flex')}>
       {detail?.fetching ? (
         <View style={styles.loading}>
-          <ActivityIndicator size={large} color={apply('gray-900')} />
+          <ActivityIndicator size="large" color={apply('gray-900')} />
         </View>
       ) : (
-        <View style={styles.container}>
-          <Image style={styles.thumb} source={{ uri: data.thumbnail }} />
-          <Text style={styles.price}>{data.price}</Text>
-          <Text style={styles.title}>{data.title}</Text>
-          <Text style={styles.stock}>{data.stock}</Text>
-          <Text style={styles.desc}>{data.desc}</Text>
+        <>
+        <ScrollView showsVerticalScrollIndicator={false} style={styles.content}>
+          <Image style={{width: width, height: width, alignSelf: 'center'}} resizeMode='cover' source={{ uri: data.thumbnail }} />
+          <View style={styles.detailSec}>
+            <Text style={styles.price}>Rp{formatMoney(data.price)}</Text>
+            <Text style={styles.title}>{data.title}</Text>
+            <Text style={styles.stock}>Stock: {data.stock} pcs</Text>
+          </View>
+          <View style={styles.descSec}>
+            <Text style={styles.descTitle}>Description :</Text>
+            <Text style={styles.desc}>{data.desc}</Text>
+          </View>
+        </ScrollView>
+        <View style={styles.footer}>
+          <View style={styles.qty}>
+            <Text style={styles.qtyLabel}>Qty: </Text>
+            <Button text='-' style={styles.btnQty} onPress={() => onMin()} />
+            <TextInput style={styles.qtyInput} maxLength={4} onChangeText={(value) => onChange(value)} keyboardType='numeric' value={qty.toString()} underlineColorAndroid={apply('gray-500')} />
+            <Button text='+' style={styles.btnQty} onPress={() => onPlus()} />
+          </View>
+          <Button text='BUY NOW' style={styles.btnBuy} textStyle={styles.btnBuyLabel}/>
         </View>
+        </>
       )}
     </SafeAreaView>
   )
 }
 
 const mapStateToProps = (state) => ({
-  detail: state.products.list
-})
-
-const mapDispatchToProps = (dispatch) => ({
-
+  detail: state.products.detail
 })
 
 ProductDetail.navigationOptions = ({ navigation }) => {
@@ -43,9 +95,9 @@ ProductDetail.navigationOptions = ({ navigation }) => {
 
   return {
     headerStyle: HeaderStyle.default,
-    headerTitle: 'Product Detail',
+    headerTitle: navigation.getParam('title', 'Product Detail'),
     headerLeft: () => <ArrowBack />
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProductDetail)
+export default connect(mapStateToProps)(ProductDetail)

@@ -22,6 +22,7 @@ export function * getDetail (api, action) {
   const response = yield call(api.getDetail, data)
 
   if (response.ok) {
+    console.tron.log("=== titid ===", response)
     yield put(ProductsActions.getDetailSuccess(response.data.data))
   } else {
     yield put(ProductsActions.getDetailFailure(response))
