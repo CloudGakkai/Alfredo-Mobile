@@ -17,11 +17,12 @@ const create = (baseURL = 'https://api.alfredo.my.id/api/v1') => {
 
   const getProducts = data => api.get(`/products${data.params}`)
   const getCategory = data => api.get(`/category`)
-  const getDetail = data => api.get(`/products/${data}`)
+  const getDetail = data => api.get(`/products${data}`)
 
   return {
     getProducts,
     getCategory,
+    getDetail,
     
     api
   }

@@ -24,7 +24,7 @@ const Products = props => {
       <Image source={{ uri: item.thumbnail }} style={styles.thumb} />
       <View style={styles.content}>
         <Text style={styles.title}>{item.title}</Text>
-        <Text style={styles.desc}>{item.desc}</Text>
+        <Text style={styles.desc}>{item.desc.substr(0, 79)}...</Text>
       </View>
     </View>
   )
@@ -34,8 +34,8 @@ const Products = props => {
   return (
     <SafeAreaView style={apply('bg-gray-500 flex')}>
       {category?.fetching ? (
-        <View>
-          <ActivityIndicator size="large" color="#fff" />
+        <View style={apply('flex justify-center items-center')}>
+          <ActivityIndicator size="large" color={apply('gray-900')} />
         </View>
       ) : (
         <FlatList

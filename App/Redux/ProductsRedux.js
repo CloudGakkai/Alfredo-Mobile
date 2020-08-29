@@ -38,12 +38,12 @@ export const getProductsFailure = (state, { error }) =>
   export const moreProductsFailure = (state, { error }) =>
     state.merge({ ...state, list: { ...state.list, isLoadMore: false, error } })
 
-    export const getDetailRequest = (state, { data }) =>
-      state.merge({ ...state, data: { ...state.data, error: null } })
-    export const getDetailSuccess = (state, { data }) =>
-      state.merge({ ...state, data: { ...state.data, data, error: null } })
-    export const getDetailFailure = (state, { error }) =>
-      state.merge({ ...state, data: { ...state.data, error } })
+  export const getDetailRequest = (state, { data }) =>
+    state.merge({ ...state, detail: {...state.detail, fetching: true, error: null} })
+  export const getDetailSuccess = (state, { data }) => 
+    state.merge({ ...state, detail: { ...state.detail, data, fetching: false, error: null }})
+  export const getDetailFailure = (state, { error }) =>
+    state.merge({ ...state, detail: {...state.detail, fetching: false, error} })
 
 export const reducer = createReducer(INITIAL_STATE, {
   [Types.GET_PRODUCTS_REQUEST]: getProductsRequest,

@@ -14,7 +14,7 @@ import { CategoryTypes } from "../Redux/CategoryRedux"
 
 import { startup } from './StartupSagas'
 import { getUserAvatar } from './GithubSagas'
-import { getProducts, moreProducts } from "./ProductsSagas"
+import { getProducts, moreProducts, getDetail } from "./ProductsSagas"
 import { getCategory } from "./CategorySagas";
 
 /* ------------- API ------------- */
@@ -32,6 +32,7 @@ export default function * root () {
 
     takeLatest(ProductsTypes.GET_PRODUCTS_REQUEST, getProducts, api),
     takeLatest(ProductsTypes.MORE_PRODUCTS_REQUEST, moreProducts, api),
-    takeLatest(CategoryTypes.GET_CATEGORY_REQUEST, getCategory, api)
+    takeLatest(CategoryTypes.GET_CATEGORY_REQUEST, getCategory, api),
+    takeLatest(ProductsTypes.GET_DETAIL_REQUEST, getDetail, api),
   ])
 }

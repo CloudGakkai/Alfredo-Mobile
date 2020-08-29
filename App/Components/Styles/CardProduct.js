@@ -1,11 +1,11 @@
 import { connect } from "../../Lib/OsmiProvider"
 
 export default connect({
-  card: "bg-white rounded-md shadow-md p-3 row items-center justify-start mb-3",
-  thumb: "rounded-md mr-3 w-100 h-100 justify-center",
-  content: "flex flex-wrap",
-  title: "text-base font-bold mb-1 flex-wrap",
-  price: "text-sm",
-  btnBuy: "bg-blue-500 rounded-md px-3 py-1 self-start",
-  btnBuyLabel: "text-white"
+  card: "bg-white rounded-sm shadow-sm flex items-start justify-center mx-0.5 my-0.5",
+  thumb: "rounded-md w-150 h-150 self-center",
+  content: "flex flex-wrap p-2",
+  title: "text-base font-bold mb-1",
+  price: "text-sm my-1 text-blue-500 font-bold",
+  btnBuy: "bg-blue-500 self-center rounded-md px-3 py-1",
+  btnBuyLabel: "text-white font-bold text-center"
 })
