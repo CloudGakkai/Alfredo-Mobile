@@ -1,8 +1,8 @@
 import { connect } from "../../Lib/OsmiProvider"
 
 export default connect({
-  card: 'row p-5 bg-white m-3 rounded-md items-center justify-start',
-  thumb: 'w-100 h-100 mr-5 rounded',
-  content: 'flex flex-wrap',
+  card: 'row bg-white m-3 flex rounded-md items-center justify-start',
+  thumb: 'w-120 h-full mr-5 rounded-l-md',
+  content: 'flex flex-wrap my-5 mr-2',
   title: 'text-lg font-bold mb-1'
 })

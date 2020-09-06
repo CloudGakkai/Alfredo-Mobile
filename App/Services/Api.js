@@ -18,11 +18,15 @@ const create = (baseURL = 'https://api.alfredo.my.id/api/v1') => {
   const getProducts = data => api.get(`/products${data.params}`)
   const getCategory = data => api.get(`/category`)
   const getDetail = data => api.get(`/products${data}`)
+  const authLogin = data => api.post(`/account/sign-in`, data)
+  const authRegister = data => api.post(`/account/sign-up`, data)
 
   return {
     getProducts,
     getCategory,
     getDetail,
+    authLogin,
+    authRegister,
     
     api
   }

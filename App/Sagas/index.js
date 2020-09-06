@@ -9,13 +9,16 @@ import { StartupTypes } from '../Redux/StartupRedux'
 import { GithubTypes } from '../Redux/GithubRedux'
 import { ProductsTypes } from "../Redux/ProductsRedux"
 import { CategoryTypes } from "../Redux/CategoryRedux"
+import { SessionTypes } from '../Redux/SessionRedux'
+import { AuthTypes } from '../Redux/AuthRedux'
 
 /* ------------- Sagas ------------- */
 
 import { startup } from './StartupSagas'
 import { getUserAvatar } from './GithubSagas'
 import { getProducts, moreProducts, getDetail } from "./ProductsSagas"
-import { getCategory } from "./CategorySagas";
+import { getCategory } from "./CategorySagas"
+import { doLogin, doRegister, doLogout } from './AuthSagas'
 
 /* ------------- API ------------- */
 
@@ -34,5 +37,9 @@ export default function * root () {
     takeLatest(ProductsTypes.MORE_PRODUCTS_REQUEST, moreProducts, api),
     takeLatest(CategoryTypes.GET_CATEGORY_REQUEST, getCategory, api),
     takeLatest(ProductsTypes.GET_DETAIL_REQUEST, getDetail, api),
+
+    takeLatest(AuthTypes.DO_LOGIN_REQUEST, doLogin, api),
+    takeLatest(AuthTypes.DO_REGISTER_REQUEST, doRegister, api),
+    takeLatest(AuthTypes.DO_LOGOUT_REQUEST, doLogout, api),
   ])
 }
