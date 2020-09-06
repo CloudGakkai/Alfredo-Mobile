@@ -63,7 +63,7 @@ const Home = props => {
           keyExtractor={(item, index) => index.toString()}
           showsVerticalScrollIndicator={false}
           initialNumToRender={8}
-          contentContainerStyle={apply('bg-gray-500')}
+          contentContainerStyle={apply('bg-gray-500 py-2')}
           renderItem={renderItem}
           refreshControl={
             <RefreshControl refreshing={refreshing} onRefresh={() => pullRefresh()} />
