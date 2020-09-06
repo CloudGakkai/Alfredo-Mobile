@@ -96,7 +96,10 @@ ProductDetail.navigationOptions = ({ navigation }) => {
   return {
     headerStyle: HeaderStyle.default,
     headerTitle: navigation.getParam('title', 'Product Detail'),
-    headerLeft: () => <ArrowBack />
+    headerLeft: () => <ArrowBack />,
+    headerTitleStyle: HeaderStyle.title,
+    headerRight: () => <View></View>,
+    headerTitleContainerStyle: {left: 55}
   }
 }
 
