@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import {
   KeyboardAvoidingView,
-  SafeAreaView,
   ActivityIndicator,
+  SafeAreaView,
   ScrollView,
-  TextInput,
   Dimensions,
+  TextInput,
+  Platform,
   Image,
   View,
   Text
@@ -20,6 +21,7 @@ import HeaderStyle from '../Navigation/Styles/NavigationStyles'
 import { apply } from '../Lib/OsmiProvider'
 
 const { width } = Dimensions.get('window')
+const OS = Platform.OS
 
 const ProductDetail = props => {
   const { detail, navigation } = props
@@ -31,9 +33,9 @@ const ProductDetail = props => {
   const [stock, setStock] = useState(stocks)
   const [qty, setQty] = useState(1)
 
-  onBuy = () => {}
+  const onBuy = () => {}
 
-  onMin = () => {
+  const onMin = () => {
     if(qty > stock) {
       setQty(stock)
     } else if(qty <= 1) {
@@ -43,45 +45,47 @@ const ProductDetail = props => {
     }
   }
 
-  onPlus = () => {
+  const onPlus = () => {
     qty < stock ? setQty(qty+1) : setQty(stock)
   }
 
-  onChange = (value) => {
+  const onChange = (value) => {
     Number(value) > stock ? setQty(stock) : setQty(Number(value))
   }
 
   return (
-    <SafeAreaView style={apply('bg-white flex')}>
-      {detail?.fetching ? (
-        <View style={styles.loading}>
-          <ActivityIndicator size="large" color={apply('gray-900')} />
-        </View>
-      ) : (
-        <>
-        <ScrollView showsVerticalScrollIndicator={false} style={styles.content}>
-          <Image style={{width: width, height: width, alignSelf: 'center'}} resizeMode='cover' source={{ uri: data.thumbnail }} />
-          <View style={styles.detailSec}>
-            <Text style={styles.price}>Rp{formatMoney(data.price)}</Text>
-            <Text style={styles.title}>{data.title}</Text>
-            <Text style={styles.stock}>Stock: {data.stock} pcs</Text>
+    <SafeAreaView style={apply('bg-gray-500 flex')}>
+      <KeyboardAvoidingView style={apply('flex')} behavior={OS === "ios" ? "padding" : null}>
+        {detail?.fetching ? (
+          <View style={styles.loading}>
+            <ActivityIndicator size="large" color={apply('gray-900')} />
           </View>
-          <View style={styles.descSec}>
-            <Text style={styles.descTitle}>Description :</Text>
-            <Text style={styles.desc}>{data.desc}</Text>
+        ) : (
+          <>
+          <ScrollView showsVerticalScrollIndicator={false} style={styles.content}>
+            <Image style={{width: width, height: width, alignSelf: 'center'}} resizeMode='cover' source={{ uri: data.thumbnail }} />
+            <View style={styles.detailSec}>
+              <Text style={styles.price}>Rp{formatMoney(data.price)}</Text>
+              <Text style={styles.title}>{data.title}</Text>
+              <Text style={styles.stock}>Stock: {data.stock} pcs</Text>
+            </View>
+            <View style={styles.descSec}>
+              <Text style={styles.descTitle}>Description :</Text>
+              <Text style={styles.desc}>{data.desc}</Text>
+            </View>
+          </ScrollView>
+          <View style={OS === 'ios' ? styles.iosFooter : styles.footer}>
+            <View style={styles.qty}>
+              <Text style={styles.qtyLabel}>Qty: </Text>
+              <Button text='-' style={styles.btnQty} onPress={() => onMin()} />
+              <TextInput style={styles.qtyInput} maxLength={4} onChangeText={(value) => onChange(value)} keyboardType='numeric' value={qty.toString()} underlineColorAndroid={apply('gray-500')} />
+              <Button text='+' style={styles.btnQty} onPress={() => onPlus()} />
+            </View>
+            <Button text='BUY NOW' style={styles.btnBuy} textStyle={styles.btnBuyLabel}/>
           </View>
-        </ScrollView>
-        <View style={styles.footer}>
-          <View style={styles.qty}>
-            <Text style={styles.qtyLabel}>Qty: </Text>
-            <Button text='-' style={styles.btnQty} onPress={() => onMin()} />
-            <TextInput style={styles.qtyInput} maxLength={4} onChangeText={(value) => onChange(value)} keyboardType='numeric' value={qty.toString()} underlineColorAndroid={apply('gray-500')} />
-            <Button text='+' style={styles.btnQty} onPress={() => onPlus()} />
-          </View>
-          <Button text='BUY NOW' style={styles.btnBuy} textStyle={styles.btnBuyLabel}/>
-        </View>
-        </>
-      )}
+          </>
+        )}
+      </KeyboardAvoidingView>
     </SafeAreaView>
   )
 }
@@ -97,9 +101,8 @@ ProductDetail.navigationOptions = ({ navigation }) => {
     headerStyle: HeaderStyle.default,
     headerTitle: navigation.getParam('title', 'Product Detail'),
     headerLeft: () => <ArrowBack />,
-    headerTitleStyle: HeaderStyle.title,
-    headerRight: () => <View></View>,
-    headerTitleContainerStyle: {left: 55}
+    headerRight: () => <View />,
+    headerTitleContainerStyle: {left: OS === 'ios' ? 0 : 55}
   }
 }
 

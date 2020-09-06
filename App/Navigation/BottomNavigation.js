@@ -9,7 +9,6 @@ import {
 
 import HomeScreen from "../Containers/Home";
 import ProductsScreen from "../Containers/Products";
-import CartScreen from "../Containers/Cart";
 import AccountScreen from "../Containers/Account";
 
 export default createBottomTabNavigator({
@@ -23,14 +22,6 @@ export default createBottomTabNavigator({
     },
     Products: {
         screen: createStackNavigator({ProductsScreen}, {
-            headerMode: 'screen',
-            navigationOptions: navigation => ({
-                tabBarIcon: ({focused, tintColor}) => <View></View>
-            })
-        })
-    },
-    Cart: {
-        screen: createStackNavigator({CartScreen}, {
             headerMode: 'screen',
             navigationOptions: navigation => ({
                 tabBarIcon: ({focused, tintColor}) => <View></View>

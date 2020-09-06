@@ -6,6 +6,8 @@ import CategoryActions from "../Redux/CategoryRedux";
 // Styles
 import styles from './Styles/ProductsStyle'
 import { apply } from '../Lib/OsmiProvider';
+import HeaderStyle from '../Navigation/Styles/NavigationStyles'
+import ArrowBack from '../Components/ArrowBack'
 
 const Products = props => {
   const {category} = props
@@ -64,5 +66,14 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   getCategory: value => dispatch(CategoryActions.getCategoryRequest(value))
 })
+
+Products.navigationOptions = ({ navigation }) => {
+  const { params = {} } = navigation.state
+
+  return {
+    headerStyle: HeaderStyle.default,
+    headerTitle: navigation.getParam('title', 'Products'),
+  }
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(Products)
