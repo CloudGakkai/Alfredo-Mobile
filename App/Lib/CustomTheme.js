@@ -11,6 +11,7 @@ export default {
   "h-100": { height: 100 },
   "w-win": { width: width },
   "h-win": { height: width },
+  "h-full": {height: "100%"},
 
   // margin padding
   "mx-0.5": {marginHorizontal: 7},
@@ -24,5 +25,4 @@ export default {
   "bottom--5": {bottom: -20},
   "bottom--6": {bottom: -24},
   "bottom--7": {bottom: -28},
-  "bottom--8": {bottom: -32}
 }

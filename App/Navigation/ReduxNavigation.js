@@ -6,6 +6,7 @@ import {
 } from 'react-navigation-redux-helpers'
 import { connect } from 'react-redux'
 import AppNavigation from './AppNavigation'
+import NavigationServices from '../Services/NavigationServices'
 
 export const appNavigatorMiddleware = createReactNavigationReduxMiddleware(
   (state) => state.nav,
@@ -35,7 +36,7 @@ class ReduxNavigation extends React.Component {
   }
 
   render () {
-    return <ReduxAppNavigator dispatch={this.props.dispatch} state={this.props.nav} />
+    return <ReduxAppNavigator dispatch={this.props.dispatch} ref={navRef => NavigationServices.setTopLevelNavigator(navRef)} state={this.props.nav} />
   }
 }
 

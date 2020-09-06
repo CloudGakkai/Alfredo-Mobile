@@ -1,5 +1,5 @@
 import React from 'react'
-import { ScrollView, Text } from 'react-native'
+import { SafeAreaView, TouchableOpacity, Text } from 'react-native'
 import { connect } from 'react-redux'
 // Add Actions - replace 'Your' with whatever your reducer is called :)
 // import YourActions from '../Redux/YourRedux'
@@ -7,11 +7,16 @@ import { connect } from 'react-redux'
 // Styles
 import styles from './Styles/AccountStyle'
 
-const Account = () => {
+const Account = (props) => {
   return (
-    <ScrollView style={styles.container}>
-      <Text>Account Container</Text>
-    </ScrollView>
+    <SafeAreaView>
+    <TouchableOpacity style={{marginVertical: 15}} onPress={() => props.navigation.navigate('LoginScreen')}>
+      <Text>Login</Text>
+    </TouchableOpacity>
+      <TouchableOpacity onPress={() => props.navigation.navigate('RegisterScreen')}>
+        <Text>Register</Text>
+      </TouchableOpacity>
+    </SafeAreaView>
   )
 }
 

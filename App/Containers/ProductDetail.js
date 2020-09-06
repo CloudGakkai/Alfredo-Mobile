@@ -63,7 +63,7 @@ const ProductDetail = props => {
         ) : (
           <>
           <ScrollView showsVerticalScrollIndicator={false} style={styles.content}>
-            <Image style={{width: width, height: width, alignSelf: 'center'}} resizeMode='cover' source={{ uri: data.thumbnail }} />
+            <Image style={{width: width, height: width}} resizeMode='cover' source={{ uri: data.thumbnail }} />
             <View style={styles.detailSec}>
               <Text style={styles.price}>Rp{formatMoney(data.price)}</Text>
               <Text style={styles.title}>{data.title}</Text>
