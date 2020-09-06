@@ -54,7 +54,7 @@ const ProductDetail = props => {
   }
 
   return (
-    <SafeAreaView style={apply('bg-gray-500 flex')}>
+    <SafeAreaView style={apply('bg-gray-100 flex')}>
       <KeyboardAvoidingView style={apply('flex')} behavior={OS === "ios" ? "padding" : null}>
         {detail?.fetching ? (
           <View style={styles.loading}>

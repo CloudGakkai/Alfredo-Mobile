@@ -2,7 +2,7 @@ import { connect } from '../../Lib/OsmiProvider'
 
 export default connect({
   loading: 'flex justify-center items-center',
-  content: 'flex-start bg-gray-500',
+  content: 'flex-start bg-gray-100',
   detailSec: 'px-2 mb-3 py-2 bg-white shadow-md',
   price: 'text-2xl font-bold',
   title: 'text-lg text-black',

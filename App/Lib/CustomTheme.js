@@ -10,6 +10,7 @@ export default {
   "w-100": { width: 100 },
   "h-100": { height: 100 },
   "w-win": { width: width },
+  "w-120": { width: 120 },
   "h-win": { height: width },
   "h-full": {height: "100%"},
 

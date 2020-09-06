@@ -52,7 +52,7 @@ const Home = props => {
   }
 
   return (
-    <SafeAreaView style={apply('flex bg-gray-500')}>
+    <SafeAreaView style={apply('flex bg-gray-100')}>
       {products?.fetching ? (
         <View style={styles.emptyState}>
           <ActivityIndicator size="large" color={apply('gray-900')} />
@@ -63,7 +63,7 @@ const Home = props => {
           keyExtractor={(item, index) => index.toString()}
           showsVerticalScrollIndicator={false}
           initialNumToRender={8}
-          contentContainerStyle={apply('bg-gray-500 py-2')}
+          contentContainerStyle={apply('bg-gray-100 py-2')}
           renderItem={renderItem}
           refreshControl={
             <RefreshControl refreshing={refreshing} onRefresh={() => pullRefresh()} />

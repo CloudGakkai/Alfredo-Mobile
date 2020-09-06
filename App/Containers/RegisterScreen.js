@@ -1,5 +1,13 @@
-import React, {useState, isValidElement} from 'react'
-import { SafeAreaView, KeyboardAvoidingView, TouchableOpacity, ScrollView, TextInput, View, Text } from 'react-native'
+import React, {useState} from 'react'
+import {
+  KeyboardAvoidingView,
+  TouchableOpacity,
+  SafeAreaView,
+  ScrollView,
+  TextInput,
+  Platform,
+  View,
+  Text } from 'react-native'
 import Icon from 'react-native-vector-icons/Feather'
 import CheckBox from '@react-native-community/checkbox'
 import { connect } from 'react-redux'
@@ -8,18 +16,17 @@ import AuthActions from '../Redux/AuthRedux'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
 import ArrowBack from '../Components/ArrowBack'
-// Add Actions - replace 'Your' with whatever your reducer is called :)
-// import YourActions from '../Redux/YourRedux'
 
 // Styles
 import styles from './Styles/RegisterScreenStyle'
 import HeaderStyle from '../Navigation/Styles/NavigationStyles'
 import { apply } from '../Lib/OsmiProvider'
 
+const OS = Platform.OS
+
 const RegisterScreen = (props) => {
   const [isSecure1, setIsSecure1] = useState(true)
   const [isSecure2, setIsSecure2] = useState(true)
-  
 
   const Scheme = Yup.object().shape({
     fullName: Yup.string()
@@ -64,7 +71,7 @@ const RegisterScreen = (props) => {
         <View style={styles.inputView}>
           <View style={styles.inputForm}>
             <Icon name="user" size={20} />
-            <TextInput 
+            <TextInput
               placeholder="Full Name"
               onChangeText={(value) => formProps.setFieldValue('fullName', value)}
               value={formProps.values.fullName}
@@ -76,7 +83,7 @@ const RegisterScreen = (props) => {
           <Text style={styles.error}>{formProps?.errors?.fullName}</Text>
           <View style={styles.inputForm}>
             <Icon name="user" size={20} />
-            <TextInput 
+            <TextInput
               placeholder="Username"
               onChangeText={(value) => formProps.setFieldValue('username', value)}
               value={formProps.values.username}
@@ -88,7 +95,7 @@ const RegisterScreen = (props) => {
           <Text style={styles.error}>{formProps?.errors?.username}</Text>
           <View style={styles.inputForm}>
             <Icon name="phone" size={20} />
-            <TextInput 
+            <TextInput
               placeholder="Phone Number"
               onChangeText={(value) => formProps.setFieldValue('phone', value)}
               value={formProps.values.phone}
@@ -101,7 +108,7 @@ const RegisterScreen = (props) => {
           <Text style={styles.error}>{formProps?.errors?.phone}</Text>
           <View style={styles.inputForm}>
             <Icon name="mail" size={20} />
-            <TextInput 
+            <TextInput
               placeholder="Email"
               onChangeText={(value) => formProps.setFieldValue('email', value)}
               value={formProps.values.email}
@@ -114,8 +121,8 @@ const RegisterScreen = (props) => {
           <Text style={styles.error}>{formProps?.errors?.email}</Text>
           <View style={styles.inputForm}>
             <Icon name="lock" size={20} />
-            <TextInput 
-              placeholder="Password" 
+            <TextInput
+              placeholder="Password"
               onChangeText={(value) => formProps.setFieldValue('password', value)}
               secureTextEntry={isSecure1}
               value={formProps.values.password}
@@ -134,8 +141,8 @@ const RegisterScreen = (props) => {
           <Text style={styles.error}>{formProps?.errors?.password}</Text>
           <View style={styles.inputForm}>
             <Icon name="lock" size={20} />
-            <TextInput 
-              placeholder="Confirm Password" 
+            <TextInput
+              placeholder="Confirm Password"
               onChangeText={(value) => formProps.setFieldValue('confirm', value)}
               secureTextEntry={isSecure2}
               value={formProps.values.confirm}
@@ -156,9 +163,9 @@ const RegisterScreen = (props) => {
             <CheckBox
               value={formProps.values.check}
               onValueChange={(newValue) => formProps.setFieldValue('check', newValue)}
-              tintColor="blue"
+              tintColor={apply('blue-500')}
             />
-            <Text>I agree to Terms & Conditions</Text>
+            <Text style={styles.textAgreement}>I agree to Terms & Conditions</Text>
           </View>
           <Text style={styles.error}>{formProps?.errors?.check}</Text>
           <TouchableOpacity style={styles.btnRegister} activeOpacity={0.9} onPress={(e) => {formProps.handleSubmit(e)}}>
@@ -190,7 +197,7 @@ const RegisterScreen = (props) => {
         >
           {formProps => renderForm(formProps)}
         </Formik>
-        <Text style={apply("self-center")}>Have an account?</Text>
+        <Text style={apply("text-base self-center")}>Have an account?</Text>
         <TouchableOpacity style={styles.btnLogin} activeOpacity={0.9} onPress={() => {props.navigation.goBack(), props.navigation.navigate('LoginScreen')}}>
           <Text style={styles.btnLoginText}>Login</Text>
         </TouchableOpacity>
@@ -218,8 +225,8 @@ RegisterScreen.navigationOptions = ({ navigation }) => {
     headerStyle: HeaderStyle.default,
     headerTitle: 'Register',
     headerLeft: () => <ArrowBack />,
-    headerRight: () => <View></View>,
-    headerTitleContainerStyle: {left: 55}
+    headerRight: () => <View />,
+    headerTitleContainerStyle: {left: OS === 'ios' ? 0 : 55}
   }
 }
 

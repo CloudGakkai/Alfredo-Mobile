@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import { SafeAreaView, KeyboardAvoidingView, TouchableOpacity, ActivityIndicator, ScrollView, TextInput, View, Text } from 'react-native'
+import { Platform, SafeAreaView, KeyboardAvoidingView, TouchableOpacity, ActivityIndicator, ScrollView, TextInput, View, Text } from 'react-native'
 import Icon from 'react-native-vector-icons/Feather'
 import { connect } from 'react-redux'
 import { Formik } from 'formik'
@@ -11,9 +11,11 @@ import styles from './Styles/LoginScreenStyle'
 import HeaderStyle from '../Navigation/Styles/NavigationStyles'
 import { apply } from '../Lib/OsmiProvider'
 
+const OS = Platform.OS
+
 const LoginScreen = (props) => {
   const [isSecure, setIsSecure] = useState(true)
-  
+
   const Scheme = Yup.object().shape({
     email: Yup.string()
             .email("Your email isn't valid")
@@ -40,7 +42,7 @@ const LoginScreen = (props) => {
         <View style={styles.inputView}>
           <View style={styles.inputForm}>
             <Icon name="mail" size={20} />
-            <TextInput 
+            <TextInput
               placeholder="Email"
               onChangeText={(value) => formProps.setFieldValue('email', value)}
               value={formProps.values.email}
@@ -53,8 +55,8 @@ const LoginScreen = (props) => {
           <Text style={styles.error}>{formProps?.errors?.email}</Text>
           <View style={styles.inputForm}>
             <Icon name="lock" size={20} />
-            <TextInput 
-              placeholder="Password" 
+            <TextInput
+              placeholder="Password"
               onChangeText={(value) => formProps.setFieldValue('password', value)}
               secureTextEntry={isSecure}
               value={formProps.values.password}
@@ -72,8 +74,8 @@ const LoginScreen = (props) => {
           </View>
           <Text style={styles.error}>{formProps?.errors?.password}</Text>
           <TouchableOpacity
-          style={[styles.btnLogin, props?.statusLogin?.fetching && apply('bg-blue-400')]} 
-          activeOpacity={0.9} 
+          style={[styles.btnLogin, props?.statusLogin?.fetching && apply('bg-blue-400')]}
+          activeOpacity={0.9}
           onPress={(e) => {formProps.handleSubmit(e)}}
           disabled={props?.statusLogin?.fetching ?? false}>
             <Text style={styles.btnLoginText}>{props?.statusLogin?.fetching ? 'Logging In...' : 'Login'}</Text>
@@ -124,8 +126,8 @@ LoginScreen.navigationOptions = ({ navigation }) => {
     headerStyle: HeaderStyle.default,
     headerTitle: 'Login',
     headerLeft: () => <ArrowBack />,
-    headerRight: () => <View></View>,
-    headerTitleContainerStyle: {left: 55}
+    headerRight: () => <View />,
+    headerTitleContainerStyle: {left: OS === 'ios' ? 0 : 55}
   }
 }
 

@@ -8,27 +8,44 @@ const headers = {
 
 // our "constructor"
 const create = (baseURL = 'https://api.alfredo.my.id/api/v1') => {
-  
+
   const api = apisauce.create({
     baseURL,
     headers,
     timeout: 10000
   })
 
-  const getProducts = data => api.get(`/products${data.params}`)
-  const getCategory = data => api.get(`/category`)
-  const getDetail = data => api.get(`/products${data}`)
+  // auth
   const authLogin = data => api.post(`/account/sign-in`, data)
   const authRegister = data => api.post(`/account/sign-up`, data)
 
+  // product
+  const getProducts = data => api.get(`/products${data.params}`)
+  const getDetail = data => api.get(`/products${data}`)
+
+  // category
+  const getCategory = data => api.get(`/category`)
+
+  // profile
+  const getProfile = data => api.get(`account/profile`)
+
   return {
-    getProducts,
-    getCategory,
-    getDetail,
+    // auth
     authLogin,
     authRegister,
-    
-    api
+
+    // product
+    getProducts,
+    getDetail,
+
+    // category
+    getCategory,
+
+    // profile
+    getProfile,
+
+    api,
+    headers
   }
 }
 
