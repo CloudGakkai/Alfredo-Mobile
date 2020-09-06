@@ -15,10 +15,10 @@ import { AuthTypes } from '../Redux/AuthRedux'
 /* ------------- Sagas ------------- */
 
 import { startup } from './StartupSagas'
-import { getUserAvatar } from './GithubSagas'
 import { getProducts, moreProducts, getDetail } from "./ProductsSagas"
 import { getCategory } from "./CategorySagas"
 import { doLogin, doRegister, doLogout } from './AuthSagas'
+import { getProfile } from './SessionSagas'
 
 /* ------------- API ------------- */
 
@@ -31,7 +31,7 @@ const api = DebugConfig.useFixtures ? FixtureAPI : API.create()
 export default function * root () {
   yield all([
     // some sagas only receive an action
-    takeLatest(StartupTypes.STARTUP, startup),
+    takeLatest(StartupTypes.STARTUP, startup, api),
 
     takeLatest(ProductsTypes.GET_PRODUCTS_REQUEST, getProducts, api),
     takeLatest(ProductsTypes.MORE_PRODUCTS_REQUEST, moreProducts, api),
@@ -41,5 +41,7 @@ export default function * root () {
     takeLatest(AuthTypes.DO_LOGIN_REQUEST, doLogin, api),
     takeLatest(AuthTypes.DO_REGISTER_REQUEST, doRegister, api),
     takeLatest(AuthTypes.DO_LOGOUT_REQUEST, doLogout, api),
+
+    takeLatest(SessionTypes.GET_PROFILE_REQUEST, getProfile, api)
   ])
 }

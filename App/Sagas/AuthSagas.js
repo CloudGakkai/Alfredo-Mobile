@@ -2,6 +2,7 @@ import { call, put, all } from 'redux-saga/effects'
 import AuthActions from '../Redux/AuthRedux'
 import SessionsActions from '../Redux/SessionRedux'
 import NavigationServices from '../Services/NavigationServices'
+import Toast from 'react-native-simple-toast'
 
 export function * doLogin(api, action) {
   const { data } = action
@@ -14,8 +15,11 @@ export function * doLogin(api, action) {
 
     yield all([
       yield put(AuthActions.doLoginSuccess(response.data.data)),
-      yield put(SessionsActions.saveSession(response.data.data))
+      yield put(SessionsActions.saveSession(response.data.data)),
+      yield put(SessionsActions.getProfileRequest())
     ])
+
+    Toast.show("Login Successfully!", Toast.LONG)
 
     if (data.event) {
       data.event()
@@ -24,7 +28,7 @@ export function * doLogin(api, action) {
     }
   } else {
     yield put(AuthActions.doLoginFailure(response))
-    alert(response?.data?.data?.message ?? "Internal Server Error")
+    Toast.show(response?.data?.data?.message ?? "Internal Server Error", Toast.LONG)
   }
 }
 
@@ -36,11 +40,15 @@ export function * doRegister(api, action) {
     api.api.setHeaders({
       "X-AUTH-TOKEN": `Bearer ${response.data.data.token}`
     })
+
     yield all([
       yield put(AuthActions.doRegisterSuccess(response.data.data)),
-      yield put(SessionsActions.saveSession(response.data.data))
+      yield put(SessionsActions.saveSession(response.data.data)),
+      yield put(SessionsActions.getProfileRequest())
     ])
-    
+
+    Toast.show("Register Successfully!", Toast.LONG)
+
     if (data.event) {
       data.event()
     } else {
@@ -48,13 +56,17 @@ export function * doRegister(api, action) {
     }
   } else {
     yield put(AuthActions.doRegisterFailure(response))
-    alert(response?.data?.data?.message ?? "Internal Server Error")
+    Toast.show(response?.data?.data?.message ?? "Internal Server Error", Toast.LONG)
   }
 }
 
 export function * doLogout(api, action) {
+  api.api.setHeaders(api.headers)
+
   yield all([
     yield put(SessionsActions.clearSession()),
     yield put(AuthActions.doLogoutSuccess("Logout Success"))
   ])
+
+  Toast.show("Logout Successfully!", Toast.LONG)
 }

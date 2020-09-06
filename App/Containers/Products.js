@@ -6,6 +6,7 @@ import CategoryActions from "../Redux/CategoryRedux";
 // Styles
 import styles from './Styles/ProductsStyle'
 import { apply } from '../Lib/OsmiProvider';
+import HeaderStyle from '../Navigation/Styles/NavigationStyles'
 
 const Products = props => {
   const {category} = props
@@ -32,7 +33,7 @@ const Products = props => {
   console.tron.log("=== ini titid ===", props.category)
 
   return (
-    <SafeAreaView style={apply('bg-gray-500 flex')}>
+    <SafeAreaView style={apply('bg-gray-100 flex')}>
       {category?.fetching ? (
         <View style={apply('flex justify-center items-center')}>
           <ActivityIndicator size="large" color={apply('gray-900')} />
@@ -45,6 +46,7 @@ const Products = props => {
           refreshControl={
             <RefreshControl refreshing={refreshing} onRefresh={() => pullToRefresh()} />
           }
+          contentContainerStyle={apply('pt-1')}
           renderItem={renderItem}
           ListEmptyComponent={() =>(
             <View>
@@ -64,5 +66,14 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   getCategory: value => dispatch(CategoryActions.getCategoryRequest(value))
 })
+
+Products.navigationOptions = ({ navigation }) => {
+  const { params = {} } = navigation.state
+
+  return {
+    headerStyle: HeaderStyle.default,
+    headerTitle: navigation.getParam('title', 'Products'),
+  }
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(Products)

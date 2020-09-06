@@ -3,7 +3,6 @@ import RegisterScreen from '../Containers/RegisterScreen'
 import LoginScreen from '../Containers/LoginScreen'
 import ProductDetail from '../Containers/ProductDetail'
 import Account from '../Containers/Account'
-import Cart from '../Containers/Cart'
 import Products from '../Containers/Products'
 import Home from '../Containers/Home'
 import { createStackNavigator } from 'react-navigation-stack';
@@ -21,7 +20,6 @@ const PrimaryNav = createStackNavigator({
     })
   },
   Account: { screen: Account },
-  Cart: { screen: Cart },
   Products: { screen: Products },
   Home: { screen: Home },
   ProductDetail: { screen: ProductDetail },
