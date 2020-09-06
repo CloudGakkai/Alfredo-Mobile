@@ -31,9 +31,9 @@ const ProductDetail = props => {
   const [stock, setStock] = useState(stocks)
   const [qty, setQty] = useState(1)
 
-  onBuy = () => {}
+  const onBuy = () => {}
 
-  onMin = () => {
+  const onMin = () => {
     if(qty > stock) {
       setQty(stock)
     } else if(qty <= 1) {
@@ -43,11 +43,11 @@ const ProductDetail = props => {
     }
   }
 
-  onPlus = () => {
+  const onPlus = () => {
     qty < stock ? setQty(qty+1) : setQty(stock)
   }
 
-  onChange = (value) => {
+  const onChange = (value) => {
     Number(value) > stock ? setQty(stock) : setQty(Number(value))
   }
 
@@ -60,7 +60,7 @@ const ProductDetail = props => {
       ) : (
         <>
         <ScrollView showsVerticalScrollIndicator={false} style={styles.content}>
-          <Image style={{width: width, height: width, alignSelf: 'center'}} resizeMode='cover' source={{ uri: data.thumbnail }} />
+          <Image style={{ width: width, height: width }} resizeMode='cover' source={{ uri: data.thumbnail }} />
           <View style={styles.detailSec}>
             <Text style={styles.price}>Rp{formatMoney(data.price)}</Text>
             <Text style={styles.title}>{data.title}</Text>
@@ -97,7 +97,6 @@ ProductDetail.navigationOptions = ({ navigation }) => {
     headerStyle: HeaderStyle.default,
     headerTitle: navigation.getParam('title', 'Product Detail'),
     headerLeft: () => <ArrowBack />,
-    headerTitleStyle: HeaderStyle.title,
     headerRight: () => <View></View>,
     headerTitleContainerStyle: {left: 55}
   }
