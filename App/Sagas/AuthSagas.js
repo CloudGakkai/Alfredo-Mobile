@@ -19,16 +19,17 @@ export function * doLogin(api, action) {
       yield put(SessionsActions.getProfileRequest())
     ])
 
-    Toast.show("Login Successfully!", Toast.LONG)
+    Toast.show("Login Successfully!", Toast.SHORT)
 
-    if (data.event) {
-      data.event()
+    if (data.event === null) {
+      NavigationServices.goBack()
     } else {
       NavigationServices.goBack()
+      data.event()
     }
   } else {
     yield put(AuthActions.doLoginFailure(response))
-    Toast.show(response?.data?.data?.message ?? "Internal Server Error", Toast.LONG)
+    Toast.show(response?.data?.data?.message ?? "Internal Server Error", Toast.SHORT)
   }
 }
 
@@ -47,16 +48,17 @@ export function * doRegister(api, action) {
       yield put(SessionsActions.getProfileRequest())
     ])
 
-    Toast.show("Register Successfully!", Toast.LONG)
+    Toast.show("Register Successfully!", Toast.SHORT)
 
-    if (data.event) {
-      data.event()
+    if (data.event === null) {
+      NavigationServices.goBack()
     } else {
-      NavigationServices.pop(2)
+      NavigationServices.goBack()
+      data.event()
     }
   } else {
     yield put(AuthActions.doRegisterFailure(response))
-    Toast.show(response?.data?.data?.message ?? "Internal Server Error", Toast.LONG)
+    Toast.show(response?.data?.data?.message ?? "Internal Server Error", Toast.SHORT)
   }
 }
 
@@ -68,5 +70,5 @@ export function * doLogout(api, action) {
     yield put(AuthActions.doLogoutSuccess("Logout Success"))
   ])
 
-  Toast.show("Logout Successfully!", Toast.LONG)
+  Toast.show("Logout Successfully!", Toast.SHORT)
 }

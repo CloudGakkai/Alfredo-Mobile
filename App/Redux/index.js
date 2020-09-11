@@ -12,7 +12,9 @@ export const reducers = combineReducers({
   products: require('./ProductsRedux').reducer,
   category: require('./CategoryRedux').reducer,
   auth: require('./AuthRedux').reducer,
-  session: require('./SessionRedux').reducer
+  session: require('./SessionRedux').reducer,
+  invoice: require('./InvoiceRedux').reducer,
+  order: require('./OrderRedux').reducer,
 })
 
 export default () => {

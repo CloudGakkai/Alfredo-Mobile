@@ -29,6 +29,12 @@ const create = (baseURL = 'https://api.alfredo.my.id/api/v1') => {
   // profile
   const getProfile = data => api.get(`account/profile`)
 
+  // invoice
+  const showInvoice = data => api.get(`/order${data}&q=`)
+
+  // order
+  const makeOrder = data => api.post(`/order`, data)
+
   return {
     // auth
     authLogin,
@@ -43,6 +49,12 @@ const create = (baseURL = 'https://api.alfredo.my.id/api/v1') => {
 
     // profile
     getProfile,
+
+    // invoice
+    showInvoice,
+
+    // order
+    makeOrder,
 
     api,
     headers
