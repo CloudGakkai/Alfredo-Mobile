@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "CovidApp.app"
-               BlueprintName = "CovidApp"
-               ReferencedContainer = "container:CovidApp.xcodeproj">
+               BuildableName = "Alfredo.app"
+               BlueprintName = "Alfredo"
+               ReferencedContainer = "container:Alfredo.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "CovidAppTests.xctest"
-               BlueprintName = "CovidAppTests"
-               ReferencedContainer = "container:CovidApp.xcodeproj">
+               BuildableName = "AlfredoTests.xctest"
+               BlueprintName = "AlfredoTests"
+               ReferencedContainer = "container:Alfredo.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "CovidApp.app"
-            BlueprintName = "CovidApp"
-            ReferencedContainer = "container:CovidApp.xcodeproj">
+            BuildableName = "Alfredo.app"
+            BlueprintName = "Alfredo"
+            ReferencedContainer = "container:Alfredo.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "CovidApp.app"
-            BlueprintName = "CovidApp"
-            ReferencedContainer = "container:CovidApp.xcodeproj">
+            BuildableName = "Alfredo.app"
+            BlueprintName = "Alfredo"
+            ReferencedContainer = "container:Alfredo.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

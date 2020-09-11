@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-               BuildableName = "CovidApp-tvOS.app"
-               BlueprintName = "CovidApp-tvOS"
-               ReferencedContainer = "container:CovidApp.xcodeproj">
+               BuildableName = "Alfredo-tvOS.app"
+               BlueprintName = "Alfredo-tvOS"
+               ReferencedContainer = "container:Alfredo.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2D02E48F1E0B4A5D006451C7"
-               BuildableName = "CovidApp-tvOSTests.xctest"
-               BlueprintName = "CovidApp-tvOSTests"
-               ReferencedContainer = "container:CovidApp.xcodeproj">
+               BuildableName = "Alfredo-tvOSTests.xctest"
+               BlueprintName = "Alfredo-tvOSTests"
+               ReferencedContainer = "container:Alfredo.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-            BuildableName = "CovidApp-tvOS.app"
-            BlueprintName = "CovidApp-tvOS"
-            ReferencedContainer = "container:CovidApp.xcodeproj">
+            BuildableName = "Alfredo-tvOS.app"
+            BlueprintName = "Alfredo-tvOS"
+            ReferencedContainer = "container:Alfredo.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-            BuildableName = "CovidApp-tvOS.app"
-            BlueprintName = "CovidApp-tvOS"
-            ReferencedContainer = "container:CovidApp.xcodeproj">
+            BuildableName = "Alfredo-tvOS.app"
+            BlueprintName = "Alfredo-tvOS"
+            ReferencedContainer = "container:Alfredo.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
