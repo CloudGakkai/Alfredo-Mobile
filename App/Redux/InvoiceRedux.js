@@ -24,7 +24,7 @@ export default Creators
 
 export const INITIAL_STATE = Immutable({
   list: { data: [], fetching: false, error: null, page: 1, lastPage: 1, isLoadMore: false },
-  show: { data: {}, fetching: false, error: null }
+  show: { data: { status: '' }, fetching: false, error: null }
 })
 
 /* ------------- Reducers ------------- */

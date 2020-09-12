@@ -81,7 +81,13 @@ const LoginScreen = (props) => {
           activeOpacity={0.9}
           onPress={(e) => {formProps.handleSubmit(e)}}
           disabled={props?.statusLogin?.fetching ?? false}>
-            <Text style={styles.btnLoginText}>{props?.statusLogin?.fetching ? 'Logging In...' : 'Login'}</Text>
+            {props?.statusLogin?.fetching ? (
+              <View style={apply('flex items-center justify-center')}>
+                <ActivityIndicator color="#fff" size="large" />
+              </View>
+            ) : (
+              <Text style={styles.btnLoginText}>Login</Text>
+            )}
           </TouchableOpacity>
         </View>
       </KeyboardAvoidingView>

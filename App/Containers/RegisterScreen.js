@@ -6,6 +6,7 @@ import {
   ScrollView,
   TextInput,
   Platform,
+  ActivityIndicator,
   View,
   Text } from 'react-native'
 import Icon from 'react-native-vector-icons/Feather'
@@ -172,11 +173,17 @@ const RegisterScreen = (props) => {
           </View>
           <Text style={styles.error}>{formProps?.errors?.check}</Text>
           <TouchableOpacity
-          style={[styles.btnLogin, props?.statusRegister?.fetching && apply('bg-blue-400')]}
+          style={[styles.btnRegister, props?.statusRegister?.fetching && apply('bg-blue-400')]}
           activeOpacity={0.9}
           onPress={(e) => {formProps.handleSubmit(e)}}
           disabled={props?.statusRegister?.fetching ?? false}>
-            <Text style={styles.btnLoginText}>{props?.statusRegister?.fetching ? 'Registering...' : 'Register'}</Text>
+            {props?.statusRegister?.fetching ? (
+              <View style={apply('flex items-center justify-center')}>
+                <ActivityIndicator color="#fff" size="large" />
+              </View>
+            ) : (
+              <Text style={styles.btnRegisterText}>Register</Text>
+            )}
           </TouchableOpacity>
         </View>
       </KeyboardAvoidingView>

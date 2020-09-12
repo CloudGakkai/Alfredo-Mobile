@@ -1,17 +1,29 @@
 import React from 'react'
-import { ScrollView, Text } from 'react-native'
+import { SafeAreaView, ScrollView, View, TextInput, Text, KeyboardAvoidingView, TouchableOpacity, Platform } from 'react-native'
 import { connect } from 'react-redux'
-// Add Actions - replace 'Your' with whatever your reducer is called :)
-// import YourActions from '../Redux/YourRedux'
+import ArrowBack from '../Components/ArrowBack'
+
+import { Formik } from 'formik'
+import * as Yup from 'yup'
+
+import Format from '../Lib/NumberFormat'
 
 // Styles
 import styles from './Styles/ConfirmPaymentStyle'
+import HeaderStyle from '../Navigation/Styles/NavigationStyles'
+import { apply } from '../Lib/OsmiProvider'
+
+const OS = Platform.OS
 
 const ConfirmPayment = () => {
   return (
-    <ScrollView style={styles.container}>
-      <Text>ConfirmPayment Container</Text>
-    </ScrollView>
+    <SafeAreaView>
+      <ScrollView>
+        <KeyboardAvoidingView>
+
+        </KeyboardAvoidingView>
+      </ScrollView>
+    </SafeAreaView>
   )
 }
 
@@ -22,6 +34,18 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+  }
+}
+
+ConfirmPayment.navigationOptions = ({ navigation }) => {
+  const { params = {} } = navigation.state
+
+  return {
+    headerStyle: HeaderStyle.default,
+    headerTitle: 'Confirm Payment',
+    headerLeft: () => <ArrowBack />,
+    headerRight: () => <View />,
+    headerTitleContainerStyle: {left: OS === 'ios' ? 0 : 55}
   }
 }
 

@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import { SafeAreaView, FlatList, View, TouchableOpacity, RefreshControl, Text, ActivityIndicator } from 'react-native'
+import { SafeAreaView, FlatList, View, TouchableOpacity, RefreshControl, Text, ActivityIndicator, Platform } from 'react-native'
 import { connect } from 'react-redux'
 import ArrowBack from '../Components/ArrowBack'
 

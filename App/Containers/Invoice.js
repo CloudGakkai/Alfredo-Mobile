@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import { SafeAreaView, ScrollView, Image, TouchableOpacity, View, Text, ActivityIndicator } from 'react-native'
+import { SafeAreaView, ScrollView, Image, TouchableOpacity, View, Text, ActivityIndicator, Platform } from 'react-native'
 import { connect } from 'react-redux'
 import ArrowBack from '../Components/ArrowBack'
 import Images from '../Themes/Images'
@@ -25,13 +25,15 @@ const Invoice = (props) => {
   const { navigation, invoice } = props
   const { data } = invoice
 
-  const status = data?.status.replace('_', ' ')
-
   const inv = navigation.getParam('inv', 'Invoice').toLowerCase()
 
   useEffect(() => {
     props.showInvoice(inv)
   }, [])
+
+  console.log(props.invoice)
+  
+  const status = data?.status.replace('_', ' ')
 
   if(invoice?.fetching){
     return (
