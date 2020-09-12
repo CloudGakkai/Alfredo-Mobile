@@ -27,10 +27,11 @@ const OrderList = (props) => {
   const renderItem = ({item, index}) => {
     const status = item?.status.replace('_', ' ')
     return (
-      <TouchableOpacity style={styles.list} activeOpacity={0.9}>
-        <Text style={apply('flex-4 p-1')}>{item?.invoice_id}</Text>
-        <Text style={apply('flex-3 p-1')}>Rp{formatMoney(item?.total)}</Text>
-        <Text style={apply('flex-5 p-1 text-center')}>{status.toUpperCase()}</Text>
+      <TouchableOpacity style={styles.card} activeOpacity={0.9} onPress={() => navigation.navigate('Invoice', { inv: item?.invoice_id })}>
+        <Text style={apply('font-bold text-blue-500')}>#{item?.invoice_id}</Text>
+        <Text style={apply('mb-1 text-base')}>{item?.product?.title}</Text>
+        <Text style={apply('mb-1')}>Rp{formatMoney(item?.total)}</Text>
+        <Text style={status == 'done' ? [styles.status, apply('bg-green-600')] : styles.status}>{status.toUpperCase()}</Text>
       </TouchableOpacity>
     )
   }
@@ -50,38 +51,37 @@ const OrderList = (props) => {
   }
 
   return (
-    <SafeAreaView style={apply('bg-white py-3')}>
-      <FlatList 
-        data={list.data}
-        keyExtractor={(item, index) => index.toString()}
-        initialNumToRender={10}
-        contentContainerStyle={apply('bg-gray-200 mx-2')}
-        renderItem={renderItem}
-        refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={() => pullRefresh()} />
-        }
-        onEndReached={onEndReached}
-        onEndReachedThreshold={0.1}
-        ListEmptyComponent={() =>
-          <View style={styles.emptyState}>
-            <Text style={apply('text-center')}>No data</Text>
-          </View>
-        }
-        ListHeaderComponent={() =>
-          <View style={[styles.list, apply('bg-gray-500')]}>
-            <Text style={apply('flex-4 p-1 font-bold text-base')}>INVOICE</Text>
-            <Text style={apply('flex-3 p-1 font-bold text-base')}>PRICE</Text>
-            <Text style={apply('flex-5 p-1 font-bold text-base text-center')}>STATUS</Text>
-          </View>
-        }
-        ListFooterComponent={() =>
-          list?.isLoadMore && (
+    <SafeAreaView style={apply('flex py-1')}>
+      {list.fetching ? (
+        <View style={styles.emptyState}>
+          <ActivityIndicator size="large" color={apply('black')} />
+        </View>
+      ) : (
+        <FlatList 
+          data={list.data}
+          keyExtractor={(item, index) => index.toString()}
+          initialNumToRender={10}
+          contentContainerStyle={apply('mx-3')}
+          renderItem={renderItem}
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={() => pullRefresh()} />
+          }
+          onEndReached={onEndReached}
+          onEndReachedThreshold={0.1}
+          ListEmptyComponent={() =>
             <View style={styles.emptyState}>
-              <ActivityIndicator size="large" style={apply('gray-900')} />
+              <Text style={apply('text-center')}>No data</Text>
             </View>
-          )
-        }
-      />
+          }
+          ListFooterComponent={() =>
+            list?.isLoadMore && (
+              <View style={styles.emptyState}>
+                <ActivityIndicator size="large" color={apply('black')} />
+              </View>
+            )
+          }
+        />
+      )}
     </SafeAreaView>
   )
 }

@@ -1,4 +1,5 @@
 import { createAppContainer } from 'react-navigation'
+import ConfirmPayment from '../Containers/ConfirmPayment'
 import OrderList from '../Containers/OrderList'
 import Invoice from '../Containers/Invoice'
 import RegisterScreen from '../Containers/RegisterScreen'
@@ -29,6 +30,7 @@ const PrimaryNav = createStackNavigator({
   LoginScreen: { screen: LoginScreen },
   Invoice: { screen: Invoice },
   OrderList: { screen: OrderList },
+  ConfirmPayment: { screen: ConfirmPayment },
 }, {
   // Default config for all screens
   initialRouteName: 'Main',
