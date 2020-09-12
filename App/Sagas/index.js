@@ -21,7 +21,7 @@ import { getProducts, moreProducts, getDetail } from "./ProductsSagas"
 import { getCategory } from "./CategorySagas"
 import { doLogin, doRegister, doLogout } from './AuthSagas'
 import { getProfile } from './SessionSagas'
-import { showInvoice } from './InvoiceSagas'
+import { getInvoice, moreInvoice, showInvoice } from './InvoiceSagas'
 import { makeOrder } from './OrderSagas'
 
 /* ------------- API ------------- */
@@ -48,6 +48,8 @@ export default function * root () {
 
     takeLatest(SessionTypes.GET_PROFILE_REQUEST, getProfile, api),
 
+    takeLatest(InvoiceTypes.GET_INVOICE_REQUEST, getInvoice, api),
+    takeLatest(InvoiceTypes.MORE_INVOICE_REQUEST, moreInvoice, api),
     takeLatest(InvoiceTypes.SHOW_INVOICE_REQUEST, showInvoice, api),
 
     takeLatest(OrderTypes.MAKE_ORDER_REQUEST, makeOrder, api),
