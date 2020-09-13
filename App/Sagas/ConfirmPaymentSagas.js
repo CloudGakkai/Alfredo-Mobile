@@ -1,6 +1,7 @@
 import { call, put } from 'redux-saga/effects'
 import ConfirmPaymentActions from '../Redux/ConfirmPaymentRedux'
-import { Alert } from 'react-native '
+import Toast from 'react-native-simple-toast'
+import NavigationServices from '../Services/NavigationServices'
 
 export function * confirmPayment (api, action) {
   const { data } = action
@@ -8,9 +9,10 @@ export function * confirmPayment (api, action) {
 
   if (response.ok) {
     yield put(ConfirmPaymentActions.confirmPaymentSuccess(response.data.data))
-    Alert.alert('Sukses', 'Order anda akan diproses segera')
+    Toast.show('Order anda akan diproses segera', Toast.LONG)
+    NavigationServices.pop(2)
   } else {
     yield put(ConfirmPaymentActions.confirmPaymentFailure(response))
-    Alert.alert('Gagal', response?.data?.data?.message)
+    Toast.show(response?.data?.data?.message ?? "Internal Server Error.", Toast.LONG)
   }
 }
