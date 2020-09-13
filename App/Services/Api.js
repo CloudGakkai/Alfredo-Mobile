@@ -27,7 +27,7 @@ const create = (baseURL = 'https://api.alfredo.my.id/api/v1') => {
   const getCategory = data => api.get(`/category`)
 
   // profile
-  const getProfile = data => api.get(`account/profile`)
+  const getProfile = data => api.get(`/account/profile`)
 
   // invoice
   const getInvoice = data => api.get(`/order?page=${data.params}&q=`)
