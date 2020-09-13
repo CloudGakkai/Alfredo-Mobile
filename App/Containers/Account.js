@@ -41,7 +41,7 @@ const Account = (props) => {
         </View>
         <View style={styles.btnContainer}>
           <View style={apply('flex')}>
-            <TouchableOpacity style={styles.btnAuth} activeOpacity={0.9} onPress={() => props.navigation.navigate('LoginScreen')}>
+            <TouchableOpacity style={styles.btnAuth} activeOpacity={0.9} onPress={() => props.navigation.navigate('OrderList')}>
               <Text style={styles.btnAuthLabel}>Orders</Text>
             </TouchableOpacity>
           </View>

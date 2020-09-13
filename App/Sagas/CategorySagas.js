@@ -6,7 +6,6 @@ export function * getCategory (api, action) {
   const response = yield call(api.getCategory, data)
 
   if (response.ok) {
-    console.tron.log("=== titid ===", response)
     yield put(CategoryActions.getCategorySuccess(response.data.data))
   } else {
     yield put(CategoryActions.getCategoryFailure(response))

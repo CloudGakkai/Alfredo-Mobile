@@ -16,6 +16,8 @@ const OS = Platform.OS
 const LoginScreen = (props) => {
   const [isSecure, setIsSecure] = useState(true)
 
+  const event = props.navigation.getParam('event', null)
+
   const Scheme = Yup.object().shape({
     email: Yup.string()
             .email("Your email isn't valid")
@@ -30,7 +32,8 @@ const LoginScreen = (props) => {
 
     props.doLogin({
       email: values.email,
-    	password: values.password
+      password: values.password,
+      event
     })
 
     return false
@@ -78,7 +81,13 @@ const LoginScreen = (props) => {
           activeOpacity={0.9}
           onPress={(e) => {formProps.handleSubmit(e)}}
           disabled={props?.statusLogin?.fetching ?? false}>
-            <Text style={styles.btnLoginText}>{props?.statusLogin?.fetching ? 'Logging In...' : 'Login'}</Text>
+            {props?.statusLogin?.fetching ? (
+              <View style={apply('flex items-center justify-center')}>
+                <ActivityIndicator color="#fff" />
+              </View>
+            ) : (
+              <Text style={styles.btnLoginText}>Login</Text>
+            )}
           </TouchableOpacity>
         </View>
       </KeyboardAvoidingView>
@@ -99,7 +108,7 @@ const LoginScreen = (props) => {
           {formProps => renderForm(formProps)}
         </Formik>
         <Text style={apply("self-center")}>Don't have an account?</Text>
-        <TouchableOpacity style={styles.btnRegister} activeOpacity={0.9} onPress={() => {props.navigation.goBack(), props.navigation.navigate('RegisterScreen')}}>
+        <TouchableOpacity style={styles.btnRegister} activeOpacity={0.9} onPress={() => {props.navigation.goBack(), props.navigation.navigate('RegisterScreen', { event })}}>
           <Text style={styles.btnRegisterText}>Register</Text>
         </TouchableOpacity>
       </ScrollView>

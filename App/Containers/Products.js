@@ -30,8 +30,6 @@ const Products = props => {
     </View>
   )
 
-  console.tron.log("=== ini titid ===", props.category)
-
   return (
     <SafeAreaView style={apply('bg-gray-100 flex')}>
       {category?.fetching ? (
@@ -72,7 +70,7 @@ Products.navigationOptions = ({ navigation }) => {
 
   return {
     headerStyle: HeaderStyle.default,
-    headerTitle: navigation.getParam('title', 'Products'),
+    headerTitle: navigation.getParam('title', 'Category'),
   }
 }
 

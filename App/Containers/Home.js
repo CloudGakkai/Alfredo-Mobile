@@ -75,7 +75,7 @@ const Home = props => {
           onEndReachedThreshold={0.1}
           ListEmptyComponent={() =>
             <View style={styles.emptyState}>
-              <Text>Tidak ada data ditampilkan.</Text>
+              <Text>No data.</Text>
             </View>
           }
           ListFooterComponent={() =>

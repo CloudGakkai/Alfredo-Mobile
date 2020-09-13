@@ -16,6 +16,8 @@ import ArrowBack from '../Components/ArrowBack'
 import Button from '../Components/Button'
 import Format from '../Lib/NumberFormat'
 
+import OrderActions from '../Redux/OrderRedux'
+
 import styles from './Styles/ProductDetailStyle'
 import HeaderStyle from '../Navigation/Styles/NavigationStyles'
 import { apply } from '../Lib/OsmiProvider'
@@ -33,7 +35,23 @@ const ProductDetail = props => {
   const [stock, setStock] = useState(stocks)
   const [qty, setQty] = useState(1)
 
-  const onBuy = () => {}
+  const nextEvent = () => {
+    props.makeOrder({
+      product_id: data.id,
+      qty
+    })
+  }
+
+  const onBuy = () => {
+    if(props.user === null) {
+      props.navigation.navigate('LoginScreen', { event: nextEvent })
+    } else {
+      props.makeOrder({
+        product_id: data.id,
+        qty
+      })
+    }
+  }
 
   const onMin = () => {
     if(qty > stock) {
@@ -65,7 +83,7 @@ const ProductDetail = props => {
           <ScrollView showsVerticalScrollIndicator={false} style={styles.content}>
             <Image style={{width: width, height: width}} resizeMode='cover' source={{ uri: data.thumbnail }} />
             <View style={styles.detailSec}>
-              <Text style={styles.price}>Rp{formatMoney(data.price)}</Text>
+              <Text style={styles.price}>Rp{formatMoney(data?.price ?? 0)}</Text>
               <Text style={styles.title}>{data.title}</Text>
               <Text style={styles.stock}>Stock: {data.stock} pcs</Text>
             </View>
@@ -81,7 +99,7 @@ const ProductDetail = props => {
               <TextInput style={styles.qtyInput} maxLength={4} onChangeText={(value) => onChange(value)} keyboardType='numeric' value={qty.toString()} underlineColorAndroid={apply('gray-500')} />
               <Button text='+' style={styles.btnQty} onPress={() => onPlus()} />
             </View>
-            <Button text='BUY NOW' style={styles.btnBuy} textStyle={styles.btnBuyLabel}/>
+            <Button text='BUY NOW' onPress={() => onBuy()} style={styles.btnBuy} textStyle={styles.btnBuyLabel}/>
           </View>
           </>
         )}
@@ -91,7 +109,12 @@ const ProductDetail = props => {
 }
 
 const mapStateToProps = (state) => ({
-  detail: state.products.detail
+  detail: state.products.detail,
+  user: state.session.user
+})
+
+const mapDispatchToProps = (dispatch) => ({
+  makeOrder: (value) => dispatch(OrderActions.makeOrderRequest(value))
 })
 
 ProductDetail.navigationOptions = ({ navigation }) => {
@@ -106,4 +129,4 @@ ProductDetail.navigationOptions = ({ navigation }) => {
   }
 }
 
-export default connect(mapStateToProps)(ProductDetail)
+export default connect(mapStateToProps, mapDispatchToProps)(ProductDetail)

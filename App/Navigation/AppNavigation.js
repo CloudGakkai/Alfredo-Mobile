@@ -1,4 +1,8 @@
 import { createAppContainer } from 'react-navigation'
+import CategoryScreen from '../Containers/CategoryScreen'
+import ConfirmPayment from '../Containers/ConfirmPayment'
+import OrderList from '../Containers/OrderList'
+import Invoice from '../Containers/Invoice'
 import RegisterScreen from '../Containers/RegisterScreen'
 import LoginScreen from '../Containers/LoginScreen'
 import ProductDetail from '../Containers/ProductDetail'
@@ -13,6 +17,7 @@ import styles from './Styles/NavigationStyles'
 
 // Manifest of possible screens
 const PrimaryNav = createStackNavigator({
+  CategoryScreen: { screen: CategoryScreen },
   Main: {
     screen: BottomNavigation,
     navigationOptions: ({navigation}) => ({
@@ -25,6 +30,9 @@ const PrimaryNav = createStackNavigator({
   ProductDetail: { screen: ProductDetail },
   RegisterScreen: { screen: RegisterScreen },
   LoginScreen: { screen: LoginScreen },
+  Invoice: { screen: Invoice },
+  OrderList: { screen: OrderList },
+  ConfirmPayment: { screen: ConfirmPayment },
 }, {
   // Default config for all screens
   initialRouteName: 'Main',

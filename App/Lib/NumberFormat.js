@@ -5,7 +5,7 @@ export default class TextUtil {
     for (i; i < value.length; i++) {
       value = value.replace(replace, replaceWith)
     }
-    console.log(value)
+    // console.log(value)
     return value;
   }
 

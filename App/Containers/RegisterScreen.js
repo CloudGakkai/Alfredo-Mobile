@@ -6,6 +6,7 @@ import {
   ScrollView,
   TextInput,
   Platform,
+  ActivityIndicator,
   View,
   Text } from 'react-native'
 import Icon from 'react-native-vector-icons/Feather'
@@ -27,6 +28,8 @@ const OS = Platform.OS
 const RegisterScreen = (props) => {
   const [isSecure1, setIsSecure1] = useState(true)
   const [isSecure2, setIsSecure2] = useState(true)
+
+  const event = props.navigation.getParam('event', null)
 
   const Scheme = Yup.object().shape({
     fullName: Yup.string()
@@ -59,7 +62,8 @@ const RegisterScreen = (props) => {
       username: values.username,
       phone_number: values.phone,
       email: values.email,
-      password: values.password
+      password: values.password,
+      event
     })
 
     return false
@@ -168,8 +172,18 @@ const RegisterScreen = (props) => {
             <Text style={styles.textAgreement}>I agree to Terms & Conditions</Text>
           </View>
           <Text style={styles.error}>{formProps?.errors?.check}</Text>
-          <TouchableOpacity style={styles.btnRegister} activeOpacity={0.9} onPress={(e) => {formProps.handleSubmit(e)}}>
-            <Text style={styles.btnRegisterText}>Register</Text>
+          <TouchableOpacity
+          style={[styles.btnRegister, props?.statusRegister?.fetching && apply('bg-blue-400')]}
+          activeOpacity={0.9}
+          onPress={(e) => {formProps.handleSubmit(e)}}
+          disabled={props?.statusRegister?.fetching ?? false}>
+            {props?.statusRegister?.fetching ? (
+              <View style={apply('flex items-center justify-center')}>
+                <ActivityIndicator color="#fff" />
+              </View>
+            ) : (
+              <Text style={styles.btnRegisterText}>Register</Text>
+            )}
           </TouchableOpacity>
         </View>
       </KeyboardAvoidingView>
@@ -198,7 +212,7 @@ const RegisterScreen = (props) => {
           {formProps => renderForm(formProps)}
         </Formik>
         <Text style={apply("text-base self-center")}>Have an account?</Text>
-        <TouchableOpacity style={styles.btnLogin} activeOpacity={0.9} onPress={() => {props.navigation.goBack(), props.navigation.navigate('LoginScreen')}}>
+        <TouchableOpacity style={styles.btnLogin} activeOpacity={0.9} onPress={() => {props.navigation.goBack(), props.navigation.navigate('LoginScreen', { event })}}>
           <Text style={styles.btnLoginText}>Login</Text>
         </TouchableOpacity>
       </ScrollView>
