@@ -45,7 +45,7 @@ const Invoice = (props) => {
     return (
       <SafeAreaView style={styles.container}>
         <View style={styles.secA}>
-          <Text style={apply('text-4xl text-red-500 font-bold')}>Rp{formatMoney(data?.total)}</Text>
+          <Text style={styles.price}>Rp{formatMoney(data?.total ?? 0)}</Text>
           <Text style={status == 'done' ? [styles.status, apply('bg-green-500')] : styles.status}>{status.toUpperCase()}</Text>
         </View>
         {status == 'done' ? <View /> : 
@@ -54,10 +54,10 @@ const Invoice = (props) => {
             <View style={styles.pay}>
               <Text>Transfer Pembayaran ke:</Text>
               <Image source={Images.bca} resizeMode="cover" />
-              <Text style={apply('text-base font-bold')}>80770822619 (Edo Rahayu)</Text>
+              <Text style={styles.rekening}>80770822619 (Edo Rahayu)</Text>
             </View>
-            <TouchableOpacity style={styles.confirm} onPress={() => navigation.navigate('ConfirmPayment')} activeOpacity={0.9}>
-              <Text style={apply('text-white font-bold text-base')}>Confirm Payment</Text>
+            <TouchableOpacity style={styles.btnConfirm} onPress={() => navigation.navigate('ConfirmPayment', { price: data?.total, inv: inv.toUpperCase() })} activeOpacity={0.9}>
+              <Text style={styles.btnConfirmText}>Confirm Payment</Text>
             </TouchableOpacity>
           </View>
         }

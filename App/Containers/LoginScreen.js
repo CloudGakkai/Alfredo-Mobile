@@ -83,7 +83,7 @@ const LoginScreen = (props) => {
           disabled={props?.statusLogin?.fetching ?? false}>
             {props?.statusLogin?.fetching ? (
               <View style={apply('flex items-center justify-center')}>
-                <ActivityIndicator color="#fff" size="large" />
+                <ActivityIndicator color="#fff" />
               </View>
             ) : (
               <Text style={styles.btnLoginText}>Login</Text>

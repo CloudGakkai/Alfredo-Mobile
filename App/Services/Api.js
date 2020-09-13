@@ -36,6 +36,9 @@ const create = (baseURL = 'https://api.alfredo.my.id/api/v1') => {
   // order
   const makeOrder = data => api.post(`/order`, data)
 
+  // payment
+  const confirm = data => api.post(`/order/confirm`, data)
+
   return {
     // auth
     authLogin,
@@ -57,6 +60,9 @@ const create = (baseURL = 'https://api.alfredo.my.id/api/v1') => {
 
     // order
     makeOrder,
+
+    // payment
+    confirm,
 
     api,
     headers

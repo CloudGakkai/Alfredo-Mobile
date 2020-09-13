@@ -30,7 +30,7 @@ const OrderList = (props) => {
       <TouchableOpacity style={styles.card} activeOpacity={0.9} onPress={() => navigation.navigate('Invoice', { inv: item?.invoice_id })}>
         <Text style={apply('font-bold text-blue-500')}>#{item?.invoice_id}</Text>
         <Text style={apply('mb-1 text-base')}>{item?.product?.title}</Text>
-        <Text style={apply('mb-1')}>Rp{formatMoney(item?.total)}</Text>
+        <Text style={apply('mb-1')}>Rp{formatMoney(item?.total ?? 0)}</Text>
         <Text style={status == 'done' ? [styles.status, apply('bg-green-600')] : styles.status}>{status.toUpperCase()}</Text>
       </TouchableOpacity>
     )
@@ -61,7 +61,7 @@ const OrderList = (props) => {
           data={list.data}
           keyExtractor={(item, index) => index.toString()}
           initialNumToRender={10}
-          contentContainerStyle={apply('mx-3')}
+          contentContainerStyle={apply('mx-2')}
           renderItem={renderItem}
           refreshControl={
             <RefreshControl refreshing={refreshing} onRefresh={() => pullRefresh()} />

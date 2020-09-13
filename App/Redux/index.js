@@ -15,6 +15,7 @@ export const reducers = combineReducers({
   session: require('./SessionRedux').reducer,
   invoice: require('./InvoiceRedux').reducer,
   order: require('./OrderRedux').reducer,
+  confirm: require('./ConfirmPaymentRedux').reducer,
 })
 
 export default () => {

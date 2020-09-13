@@ -179,7 +179,7 @@ const RegisterScreen = (props) => {
           disabled={props?.statusRegister?.fetching ?? false}>
             {props?.statusRegister?.fetching ? (
               <View style={apply('flex items-center justify-center')}>
-                <ActivityIndicator color="#fff" size="large" />
+                <ActivityIndicator color="#fff" />
               </View>
             ) : (
               <Text style={styles.btnRegisterText}>Register</Text>
