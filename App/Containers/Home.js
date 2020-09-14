@@ -1,24 +1,23 @@
 import React, { useState, useEffect } from 'react'
-import { 
-  SafeAreaView, 
-  ActivityIndicator, 
-  TouchableOpacity,
-  RefreshControl, 
-  FlatList, 
-  Image, 
-  View, 
-  Text 
+import {
+  SafeAreaView,
+  ActivityIndicator,
+  RefreshControl,
+  FlatList,
+  View,
+  Text,
+  StatusBar
 } from 'react-native'
 import { connect } from "react-redux";
 import ProductsActions from "../Redux/ProductsRedux";
-import ListProduct from '../Components/ListProduct'
+import CardProduct from '../Components/CardProduct'
 
 import styles from './Styles/HomeStyle'
 import HeaderStyle from "../Navigation/Styles/NavigationStyles";
 import { apply } from '../Lib/OsmiProvider'
 
 const Home = props => {
-  const { products } = props
+  const { products, navigation } = props
   const [refreshing, setRefreshing] = useState(false)
 
   useEffect(() => {
@@ -30,22 +29,30 @@ const Home = props => {
   }
 
   const renderItem = ({ item, index }) => (
-    <ListProduct thumb={{uri: item.thumbnail}} title={item?.title} price={item?.price} press={() => alert('Beli')} />
+    <CardProduct
+      item={item}
+      onPress={() => onPress(item)}
+    />
   )
 
-  const onEndReached = async (distance) => {
+  const onEndReached = async() => {
     const { page, lastPage, isLoadMore } = props.products
-    
+
     if (!isLoadMore && (page < lastPage)) {
       const newPage = page + 1
-      
-      console.tron.log("load more running")
+
       props.moreProducts({ params: `?page=${newPage}`, page: newPage })
     }
   }
 
+  const onPress = (item) => {
+    props.getDetail('/' + item?.slug)
+    navigation.navigate('ProductDetail', {title: item.title, stock: item.stock})
+  }
+
   return (
-    <SafeAreaView style={apply('flex')}>
+    <SafeAreaView style={apply('flex bg-gray-100')}>
+      <StatusBar backgroundColor={apply("blue-500")} barStyle='light-content' />
       {products?.fetching ? (
         <View style={styles.emptyState}>
           <ActivityIndicator size="large" color={apply('gray-900')} />
@@ -56,16 +63,19 @@ const Home = props => {
           keyExtractor={(item, index) => index.toString()}
           showsVerticalScrollIndicator={false}
           initialNumToRender={8}
-          contentContainerStyle={apply('p-5 bg-gray-500')}
+          contentContainerStyle={apply('bg-gray-100 py-2')}
           renderItem={renderItem}
           refreshControl={
             <RefreshControl refreshing={refreshing} onRefresh={() => pullRefresh()} />
           }
           onEndReached={onEndReached}
+          horizontal={false}
+          numColumns={2}
+          key={2}
           onEndReachedThreshold={0.1}
           ListEmptyComponent={() =>
             <View style={styles.emptyState}>
-              <Text>Tidak ada data ditampilkan.</Text>
+              <Text>No data.</Text>
             </View>
           }
           ListFooterComponent={() =>
@@ -82,12 +92,14 @@ const Home = props => {
 }
 
 const mapStateToProps = (state) => ({
-  products: state.products.list
+  products: state.products.list,
+  detail: state.products.detail
 })
 
-const mapDispatctToProps = (dispatch) => ({
+const mapDispatchToProps = (dispatch) => ({
   getProductsList: value => dispatch(ProductsActions.getProductsRequest(value)),
-  moreProducts: value => dispatch(ProductsActions.moreProductsRequest(value))
+  moreProducts: value => dispatch(ProductsActions.moreProductsRequest(value)),
+  getDetail: value => dispatch(ProductsActions.getDetailRequest(value))
 })
 
 Home.navigationOptions = ({ navigation }) => {
@@ -95,8 +107,10 @@ Home.navigationOptions = ({ navigation }) => {
 
   return {
     headerStyle: HeaderStyle.default,
-    headerTitle: 'Home'
+    headerTitle: 'Home',
+    headerTitleStyle: apply("text-center"),
+    headerLayoutPreset: 'center'
   }
 }
 
-export default connect(mapStateToProps, mapDispatctToProps)(Home)
+export default connect(mapStateToProps, mapDispatchToProps)(Home)

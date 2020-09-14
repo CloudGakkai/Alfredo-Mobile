@@ -3,18 +3,17 @@ require_relative '../node_modules/@react-native-community/cli-platform-ios/nativ
 
 platform :ios, '10.0'
 
-target 'CovidApp' do
+target 'Alfredo' do
   config = use_native_modules!
 
   use_react_native!(:path => config["reactNativePath"])
 
-  pod 'RNGestureHandler', :path => '../node_modules/react-native-gesture-handler'
+
+
 
   pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
 
-  pod 'RNI18n', :path => '../node_modules/react-native-i18n'
-
-  target 'CovidAppTests' do
+  target 'AlfredoTests' do
     inherit! :complete
     # Pods for testing
   end
@@ -29,10 +28,10 @@ target 'CovidApp' do
   end
 end
 
-target 'CovidApp-tvOS' do
-  # Pods for CovidApp-tvOS
+target 'Alfredo-tvOS' do
+  # Pods for Alfredo-tvOS
 
-  target 'CovidApp-tvOSTests' do
+  target 'Alfredo-tvOSTests' do
     inherit! :search_paths
     # Pods for testing
   end

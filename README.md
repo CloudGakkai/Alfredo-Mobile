@@ -1,32 +1,46 @@
-#  CovidApp
-[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](http://standardjs.com/)
+<p align="center">
+  <h1>Alfredo Mobile App</h1><br>
+  Alfredo Mobile App is an open source mobile app about simple online shop built with React Native and OsmiCSX for learning purpose.
+</p>
 
-* Standard compliant React Native App Utilizing [Ignite](https://github.com/infinitered/ignite)
+<p align="center">
+    <a href="LICENSE"><img src="https://img.shields.io/github/license/CloudGakkai/Alfredo-Mobile.svg?style=flat" alt="LICENSE"></a>
+    <a href="https://github.com/CloudGakkai/Alfredo-Mobile/stargazers"><img src="https://img.shields.io/github/stars/CloudGakkai/Alfredo-Mobile.svg?style=flat" alt="Stars"></a>
+    <a href="http://standardjs.com/"><img src="https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat" alt="JS Standard"></a>
+    <a href="https://github.com/facebook/react-native"><img src="https://img.shields.io/badge/react--native-0.63.0-blue.svg?style=flat" alt="React Native"></a>
+    <a href="https://github.com/OsmiCSX/osmicsx"><img src="https://img.shields.io/badge/osmicsx-0.5.0-orange.svg?style=flat" alt="OsmiCSX"></a>
+</p>
 
-## :arrow_up: How to Setup
+---
 
-**Step 1:** git clone this repo:
+<p align="center">
+  <img src="https://i.imgur.com/MLLMHmm.png" width="239px" height="380px;" />
+  <img src="https://i.imgur.com/xDGe8Y4.png" width="234px" height="430px;" />
+</p>
 
-**Step 2:** cd to the cloned repo:
+## Prerequisites
+- Xcode or Android Studio installed and exported on your ~/.bash_profile or similar
+- JDK 1.8.x
+- Node >= 12.*
+- react-native-cli
 
-**Step 3:** Install the Application with `yarn` or `npm i`
+## Installation
+open terminal and change directory to your desired folder, then:
+```
+$ git clone git@github.com:CloudGakkai/Alfredo-Mobile.git YourAppName
+$ cd YourAppName
+$ yarn install
+$ npx pod-install
+```
+## Run Your App
+```
+$ npx react-native run-android
+$ npx react-native run-ios
+```
+## License
+The code is available at [GitHub][home] under the [MIT license][license-url].
 
-
-## :arrow_forward: How to Run App
-
-1. cd to the repo
-2. Run Build for either OS
-  * for iOS
-    * run `npx react-native run-ios`
-  * for Android
-    * Run Genymotion
-    * run `npx react-native run-android`
-
-## :no_entry_sign: Standard Compliant
-
-[![js-standard-style](https://cdn.rawgit.com/feross/standard/master/badge.svg)](https://github.com/feross/standard)
-This project adheres to Standard.  Our CI enforces this, so we suggest you enable linting to keep your project compliant during development.
-
+## Additional
 **To Lint on Commit**
 
 This is implemented using [husky](https://github.com/typicode/husky). There is no additional setup needed.
@@ -65,3 +79,19 @@ The `.env` file is ignored by git keeping those secrets out of your repo.
 2. Add your config variables
 3. Follow instructions at [https://github.com/luggit/react-native-config#setup](https://github.com/luggit/react-native-config#setup)
 4. Done!
+
+## Useful Links
+- [alfredo-api](https://github.com/DeVoresyah/alfredo-api)
+- [Admin-Alfredo](https://github.com/DeVoresyah/Admin-Alfredo)
+- [alfredo](https://github.com/DeVoresyah/alfredo)
+- [API Documenter](https://documenter.getpostman.com/view/5021919/T1LTeQ3y)
+
+## Contributors
+Suggestions and contributions are welcome via Pull Requests.
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+| [<img src="https://avatars3.githubusercontent.com/u/8052370" width="100px;"/><br /><sub><b>Rully Ardiansyah</b></sub>](https://github.com/DeVoresyah)<br />[💻](https://github.com/CloudGakkai/Alfredo-Mobile/commits?author=DeVoresyah "Code") [📖](https://github.com/CloudGakkai/Alfredo-Mobile/commits?author=DeVoresyah "Documentation") [💬](#question-devoresyah "Answering Questions") [👀](#review-devoresyah "Reviewed Pull Requests") [💡](#example-devoresyah "Examples") | [<img src="https://avatars3.githubusercontent.com/u/67543151?s=460&u=d1abfe2ce47c9b2d1c8e9721c79a424df68b9b12&v=4" width="100px;"/><br /><sub><b>Rizki Budi</b></sub>](https://github.com/rizbud)<br /> [💻](https://github.com/CloudGakkai/Alfredo-Mobile/commits?author=rizbud "Code") [💬](#question-rizbud "Answering Questions") [💡](#example-rizbud "Examples") |
+| :---: | :---: |
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+[home]: https://github.com/CloudGakkai/Alfredo-Mobile
+[license-url]: https://github.com/CloudGakkai/Alfredo-Mobile/blob/master/LICENSE

@@ -1,10 +1,15 @@
 import { createAppContainer } from 'react-navigation'
+import CategoryScreen from '../Containers/CategoryScreen'
+import ConfirmPayment from '../Containers/ConfirmPayment'
+import OrderList from '../Containers/OrderList'
+import Invoice from '../Containers/Invoice'
+import RegisterScreen from '../Containers/RegisterScreen'
+import LoginScreen from '../Containers/LoginScreen'
+import ProductDetail from '../Containers/ProductDetail'
 import Account from '../Containers/Account'
-import Cart from '../Containers/Cart'
 import Products from '../Containers/Products'
 import Home from '../Containers/Home'
 import { createStackNavigator } from 'react-navigation-stack';
-import LaunchScreen from '../Containers/LaunchScreen'
 import BottomNavigation from "./BottomNavigation";
 
 import styles from './Styles/NavigationStyles'
@@ -18,12 +23,17 @@ const PrimaryNav = createStackNavigator({
     })
   },
   Account: { screen: Account },
-  Cart: { screen: Cart },
-  Products: { screen: Products },
-  Home: { screen: Home }
+  Category: { screen: Products },
+  Home: { screen: Home },
+  ProductDetail: { screen: ProductDetail },
+  RegisterScreen: { screen: RegisterScreen },
+  LoginScreen: { screen: LoginScreen },
+  Invoice: { screen: Invoice },
+  OrderList: { screen: OrderList },
+  ConfirmPayment: { screen: ConfirmPayment },
+  CategoryScreen: { screen: CategoryScreen },
 }, {
   // Default config for all screens
-  headerMode: 'none',
   initialRouteName: 'Main',
   navigationOptions: {
     headerStyle: styles.header
