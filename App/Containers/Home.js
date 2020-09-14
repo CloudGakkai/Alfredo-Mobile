@@ -107,7 +107,8 @@ Home.navigationOptions = ({ navigation }) => {
 
   return {
     headerStyle: HeaderStyle.default,
-    headerTitle: 'Home'
+    headerTitle: 'Home',
+    headerLayoutPreset: 'center'
   }
 }
 

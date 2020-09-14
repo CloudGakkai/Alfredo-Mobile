@@ -13,6 +13,7 @@ import { SessionTypes } from '../Redux/SessionRedux'
 import { AuthTypes } from '../Redux/AuthRedux'
 import { InvoiceTypes } from '../Redux/InvoiceRedux'
 import { OrderTypes } from '../Redux/OrderRedux'
+import { ConfirmPaymentTypes } from '../Redux/ConfirmPaymentRedux'
 
 /* ------------- Sagas ------------- */
 
@@ -23,6 +24,7 @@ import { doLogin, doRegister, doLogout } from './AuthSagas'
 import { getProfile } from './SessionSagas'
 import { getInvoice, moreInvoice, showInvoice } from './InvoiceSagas'
 import { makeOrder } from './OrderSagas'
+import { confirmPayment } from './ConfirmPaymentSagas'
 
 /* ------------- API ------------- */
 
@@ -55,5 +57,7 @@ export default function * root () {
     takeLatest(InvoiceTypes.SHOW_INVOICE_REQUEST, showInvoice, api),
 
     takeLatest(OrderTypes.MAKE_ORDER_REQUEST, makeOrder, api),
+
+    takeLatest(ConfirmPaymentTypes.CONFIRM_PAYMENT_REQUEST, confirmPayment, api)
   ])
 }
