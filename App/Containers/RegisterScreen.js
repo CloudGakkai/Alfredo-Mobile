@@ -6,6 +6,7 @@ import {
   ScrollView,
   TextInput,
   Platform,
+  StatusBar,
   ActivityIndicator,
   View,
   Text } from 'react-native'
@@ -192,6 +193,7 @@ const RegisterScreen = (props) => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <StatusBar backgroundColor={apply("blue-500")} barStyle='light-content' />
       <ScrollView contentContainerStyle={apply('p-5')}>
         <Text style={styles.hello}>Hello</Text>
         <Text style={styles.caption}>Create new account</Text>

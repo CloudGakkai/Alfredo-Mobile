@@ -1,5 +1,16 @@
 import React, {useState} from 'react'
-import { Platform, SafeAreaView, KeyboardAvoidingView, TouchableOpacity, ActivityIndicator, ScrollView, TextInput, View, Text } from 'react-native'
+import {
+  Platform,
+  SafeAreaView,
+  KeyboardAvoidingView,
+  TouchableOpacity,
+  ActivityIndicator,
+  ScrollView,
+  TextInput,
+  StatusBar,
+  View,
+  Text
+} from 'react-native'
 import Icon from 'react-native-vector-icons/Feather'
 import { connect } from 'react-redux'
 import { Formik } from 'formik'
@@ -96,6 +107,7 @@ const LoginScreen = (props) => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <StatusBar backgroundColor={apply("blue-500")} barStyle='light-content' />
       <ScrollView contentContainerStyle={apply('p-5')}>
         <Text style={styles.hello}>Welcome back</Text>
         <Text style={styles.caption}>Login to your account</Text>

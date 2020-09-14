@@ -1,5 +1,5 @@
 import React from 'react'
-import { SafeAreaView, ScrollView, TouchableOpacity, View, Text } from 'react-native'
+import { SafeAreaView, ScrollView, TouchableOpacity, View, Text, StatusBar } from 'react-native'
 import { connect } from 'react-redux'
 import AuthActions from '../Redux/AuthRedux'
 
@@ -12,6 +12,7 @@ const Account = (props) => {
   const guestView = () => {
     return (
       <ScrollView contentContainerStyle={styles.content}>
+        <StatusBar backgroundColor={apply("blue-500")} barStyle='light-content' />
         <View style={styles.helloContainer}>
           <Text style={styles.helloText}>Hi!</Text>
         </View>
@@ -81,6 +82,8 @@ Account.navigationOptions = ({ navigation }) => {
   return {
     headerStyle: HeaderStyle.default,
     headerTitle: navigation.getParam('title', 'Account'),
+    headerTitleStyle: apply("text-center"),
+    headerLayoutPreset: 'center'
   }
 }
 

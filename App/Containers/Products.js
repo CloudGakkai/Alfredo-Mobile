@@ -1,5 +1,15 @@
 import React, {useEffect, useState} from 'react'
-import { SafeAreaView, ActivityIndicator, RefreshControl, FlatList, Image, View, Text, TouchableOpacity } from 'react-native'
+import {
+  SafeAreaView,
+  ActivityIndicator,
+  RefreshControl,
+  FlatList,
+  Image,
+  StatusBar,
+  View,
+  Text,
+  TouchableOpacity
+} from 'react-native'
 import { connect } from 'react-redux'
 import CategoryActions from "../Redux/CategoryRedux";
 
@@ -32,6 +42,7 @@ const Products = props => {
 
   return (
     <SafeAreaView style={apply('bg-gray-100 flex')}>
+      <StatusBar backgroundColor={apply("blue-500")} barStyle='light-content' />
       {category?.fetching ? (
         <View style={apply('flex justify-center items-center')}>
           <ActivityIndicator size="large" color={apply('gray-900')} />
@@ -70,7 +81,9 @@ Products.navigationOptions = ({ navigation }) => {
 
   return {
     headerStyle: HeaderStyle.default,
-    headerTitle: 'Category'
+    headerTitle: 'Category',
+    headerTitleStyle: apply("text-center"),
+    headerLayoutPreset: 'center'
   }
 }
 

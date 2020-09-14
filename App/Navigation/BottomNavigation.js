@@ -1,5 +1,4 @@
 import React from 'react'
-import { View } from "react-native";
 import Icon from 'react-native-vector-icons/Feather'
 import { createStackNavigator } from 'react-navigation-stack'
 import { createBottomTabNavigator } from "react-navigation-tabs"
@@ -14,15 +13,15 @@ export default createBottomTabNavigator({
         screen: createStackNavigator({HomeScreen}, {
             headerMode: 'screen',
             navigationOptions: navigation => ({
-                tabBarIcon: ({focused, tintColor}) => <Icon name="home" size={25} color={tintColor} />
+                tabBarIcon: ({focused, tintColor}) => <Icon style={apply("mt-2")} name="home" size={25} color={tintColor} />
             })
         })
     },
-    Products: {
+    Category: {
         screen: createStackNavigator({ProductsScreen}, {
             headerMode: 'screen',
             navigationOptions: navigation => ({
-                tabBarIcon: ({focused, tintColor}) => <Icon name="grid" size={25} color={tintColor} />
+                tabBarIcon: ({focused, tintColor}) => <Icon style={apply("mt-2")} name="grid" size={25} color={tintColor} />
             })
         })
     },
@@ -30,7 +29,7 @@ export default createBottomTabNavigator({
         screen: createStackNavigator({AccountScreen}, {
             headerMode: 'screen',
             navigationOptions: navigation => ({
-                tabBarIcon: ({focused, tintColor}) => <Icon name="user" size={25} color={tintColor} />
+                tabBarIcon: ({focused, tintColor}) => <Icon style={apply("mt-2")} name="user" size={25} color={tintColor} />
             })
         })
     }

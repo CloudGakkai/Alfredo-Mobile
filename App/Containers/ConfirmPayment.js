@@ -5,6 +5,7 @@ import {
   SafeAreaView,
   ScrollView,
   TextInput,
+  StatusBar,
   Platform,
   Image,
   Modal,
@@ -223,6 +224,7 @@ const ConfirmPayment = props => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <StatusBar backgroundColor={apply("blue-500")} barStyle='light-content' />
       <ScrollView contentContainerStyle={apply('p-5')}>
         <Formik
           onSubmit={handleSubmit}

@@ -6,6 +6,7 @@ import {
   ScrollView,
   Dimensions,
   TextInput,
+  StatusBar,
   Platform,
   Image,
   View,
@@ -73,6 +74,7 @@ const ProductDetail = props => {
 
   return (
     <SafeAreaView style={apply('bg-gray-100 flex')}>
+      <StatusBar backgroundColor={apply("blue-500")} barStyle='light-content' />
       <KeyboardAvoidingView style={apply('flex')} behavior={OS === "ios" ? "padding" : null}>
         {detail?.fetching ? (
           <View style={styles.loading}>

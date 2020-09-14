@@ -1,8 +1,19 @@
 import React, {useState, useEffect} from 'react'
-import { SafeAreaView, ScrollView, Image, TouchableOpacity, View, Text, ActivityIndicator, Platform } from 'react-native'
+import {
+  SafeAreaView,
+  ScrollView,
+  Image,
+  TouchableOpacity,
+  View,
+  Text,
+  ActivityIndicator,
+  Platform,
+  StatusBar
+} from 'react-native'
 import { connect } from 'react-redux'
 import ArrowBack from '../Components/ArrowBack'
 import Images from '../Themes/Images'
+import Collapsible from 'react-native-collapsible'
 
 import InvoiceActions from '../Redux/InvoiceRedux'
 
@@ -18,9 +29,9 @@ const { formatMoney } = new Format ()
 const OS = Platform.OS
 
 const Invoice = (props) => {
-  const [atm, setAtm] = useState(true)
-  const [mbank, setMbank] = useState(false)
-  const [ibank, setIbank] = useState(false)
+  const [atm, setAtm] = useState(false)
+  const [mbca, setMbca] = useState(true)
+  const [ibank, setIbank] = useState(true)
 
   const { navigation, invoice } = props
   const { data } = invoice
@@ -30,37 +41,137 @@ const Invoice = (props) => {
   useEffect(() => {
     props.showInvoice(inv)
   }, [])
-
-  console.log(props.invoice)
   
   const status = data?.status.replace('_', ' ')
+  const price = formatMoney(data?.total ?? 0)
+
+  const panduan = {
+    atm: [
+      '1. Masukkan Kartu ATM & PIN',
+      '2. Pilih "Transaksi Lainnya"',
+      '3. Pilih "Transfer"',
+      '4. Pilih "Ke Rek Bank Lain"',
+      '5. Masukkan kode bank 014',
+      '6. Masukkan nomor rekening tujuan 80770822619',
+      '7. Masukkan jumlah transfer Rp' + price,
+      '8. Baca kembali detail pembayaran dan konfirmasi transaksi'
+    ],
+    mbca: [
+      '1. Log in pada aplikasi BCA Mobile',
+      '2. Pilih menu m-BCA, kemudian masukkan kode akses m-BCA',
+      '3. Pilih "m-Transfer" kemudian "Daftar Transfer - Antar Rekening"',
+      '4. Masukkan nomor rekening 80770822619',
+      '5. Klik "Send" dan masukkan PIN untuk mendaftarkan nomor rekening tujuan anda',
+      '6. Pilih "Transfer - Antar Rekening"',
+      '7. Pilih nomor rekening tujuan',
+      '8. Masukkan jumlah uang Rp' + price,
+      '9. Klik "Send" dan masukkan PIN'
+    ],
+    ibank: [
+      '1. Login ke website Mandiri Online dengan memasukkan user ID dan PIN',
+      '2. Pilih menu "Transfer"',
+      '3. Lalu pilih "Ke Bank Lain"',
+      '4. Masukkan kode bank 014',
+      '5. Masukkan rekening tujuan 80770822619',
+      '6. Masukkan jumlah transfer Rp' + price,
+      '7. Klik Lanjut',
+      '8. Periksa kembali transaksi, kemudian klik Kirim'
+    ]
+  }
+
+  const atmClick = () => {
+    if(!atm) {
+      setAtm(true)
+    } else {
+      setAtm(false)
+      setMbca(true)
+      setIbank(true)
+    }
+  }
+
+  const mbcaClick = () => {
+    if(!mbca) {
+      setMbca(true)
+    } else {
+      setAtm(true)
+      setMbca(false)
+      setIbank(true)
+    }
+  }
+
+  const ibankClick = () => {
+    if(!ibank) {
+      setIbank(true)
+    } else {
+      setAtm(true)
+      setMbca(true)
+      setIbank(false)
+    }
+  }
 
   if(invoice?.fetching){
     return (
       <SafeAreaView style={styles.emptyState}>
+        <StatusBar backgroundColor={apply("blue-500")} barStyle='light-content' />
         <ActivityIndicator size="large" color="#000" />
       </SafeAreaView>
     )
   } else {
     return (
       <SafeAreaView style={styles.container}>
-        <View style={styles.secA}>
-          <Text style={styles.price}>Rp{formatMoney(data?.total ?? 0)}</Text>
-          <Text style={status == 'done' ? [styles.status, apply('bg-green-500')] : styles.status}>{status.toUpperCase()}</Text>
-        </View>
-        {status == 'done' ? <View /> : 
-          <View>
-            <Text style={styles.alert}>Pastikan jumlah nominal yang ditransfer sama seperti yang tercantum di atas.</Text>
-            <View style={styles.pay}>
-              <Text>Transfer Pembayaran ke:</Text>
-              <Image source={Images.bca} resizeMode="cover" />
-              <Text style={styles.rekening}>80770822619 (Edo Rahayu)</Text>
-            </View>
-            <TouchableOpacity style={styles.btnConfirm} onPress={() => navigation.navigate('ConfirmPayment', { price: data?.total, inv: inv.toUpperCase() })} activeOpacity={0.9}>
-              <Text style={styles.btnConfirmText}>Confirm Payment</Text>
-            </TouchableOpacity>
+        <StatusBar backgroundColor={apply("blue-500")} barStyle='light-content' />
+        <ScrollView showsVerticalScrollIndicator={false} style={apply("py-3")}>
+          <View style={styles.secA}>
+            <Text style={styles.price}>Rp{price}</Text>
+            <Text style={status == 'done' ? [styles.status, apply('bg-green-500')] : styles.status}>{status.toUpperCase()}</Text>
           </View>
-        }
+          {status == 'done' ? <View /> : 
+            <View>
+              <Text style={styles.alert}>Pastikan jumlah nominal yang ditransfer sama seperti yang tercantum di atas.</Text>
+              <View style={styles.pay}>
+                <Text>Transfer Pembayaran ke:</Text>
+                <Image source={Images.bca} resizeMode="cover" />
+                <Text style={styles.rekening}>80770822619 (Edo Rahayu)</Text>
+              </View>
+              <View style={styles.panduanBox}>
+                <Text style={styles.panduanTitle}>Petunjuk Pembayaran</Text>
+                <View style={styles.panduan}>
+                  <TouchableOpacity style={styles.collapse} onPress={() => atmClick()}>
+                    <Text style={styles.panduanLabel}>Melalui ATM</Text>
+                    <Collapsible style={apply("pt-2")} collapsed={atm}>
+                      {panduan.atm.map((item, index) => (
+                        <Text key={index}>{item}</Text>
+                      ))}
+                    </Collapsible>
+                  </TouchableOpacity>
+                </View>
+                <View style={styles.panduan}>
+                  <TouchableOpacity style={styles.collapse} onPress={() => mbcaClick()}>
+                    <Text style={styles.panduanLabel}>m-BCA (BCA Mobile)</Text>
+                    <Collapsible style={apply("pt-2")} collapsed={mbca}>
+                      {panduan.mbca.map((item, index) => (
+                        <Text key={index}>{item}</Text>
+                      ))}
+                    </Collapsible>
+                  </TouchableOpacity>
+                </View>
+                <View style={styles.panduan}>
+                  <TouchableOpacity style={styles.collapse} onPress={() => ibankClick()}>
+                    <Text style={styles.panduanLabel}>Internet Banking</Text>
+                    <Collapsible style={apply("pt-2")} collapsed={ibank}>
+                      {panduan.ibank.map((item, index) => (
+                        <Text key={index}>{item}</Text>
+                      ))}
+                    </Collapsible>
+                  </TouchableOpacity>
+                </View>
+              </View>
+              <TouchableOpacity style={styles.btnConfirm} onPress={() => navigation.navigate('ConfirmPayment', { price: data?.total, inv: inv.toUpperCase() })} activeOpacity={0.9}>
+                <Text style={styles.btnConfirmText}>Confirm Payment</Text>
+              </TouchableOpacity>
+            </View>
+          }
+        </ScrollView>
       </SafeAreaView>
     )
   }

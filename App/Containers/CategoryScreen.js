@@ -1,5 +1,14 @@
 import React, {useEffect, useState} from 'react'
-import { SafeAreaView, FlatList, TouchableOpacity, View, ActivityIndicator, RefreshControl, Text, Platform } from 'react-native'
+import {
+  SafeAreaView,
+  FlatList,
+  View,
+  ActivityIndicator,
+  RefreshControl,
+  Text,
+  Platform,
+  StatusBar
+} from 'react-native'
 import { connect } from 'react-redux'
 import CardProduct from '../Components/CardProduct'
 import ArrowBack from '../Components/ArrowBack'
@@ -28,8 +37,6 @@ const CategoryScreen = (props) => {
     props.showCategory(slug)
   }
 
-  console.log(props.products)
-
   const renderItem = ({ item, index }) => (
     <CardProduct
       item={item}
@@ -44,6 +51,7 @@ const CategoryScreen = (props) => {
 
   return (
     <SafeAreaView style={apply('flex bg-gray-100')}>
+      <StatusBar backgroundColor={apply("blue-500")} barStyle='light-content' />
       {products?.fetching ? (
         <View style={styles.emptyState}>
           <ActivityIndicator size="large" color={apply('gray-900')} />

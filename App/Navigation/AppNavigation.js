@@ -24,7 +24,7 @@ const PrimaryNav = createStackNavigator({
     })
   },
   Account: { screen: Account },
-  Products: { screen: Products },
+  Category: { screen: Products },
   Home: { screen: Home },
   ProductDetail: { screen: ProductDetail },
   RegisterScreen: { screen: RegisterScreen },
