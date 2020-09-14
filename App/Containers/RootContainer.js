@@ -7,6 +7,7 @@ import ReduxPersist from '../Config/ReduxPersist'
 
 // Styles
 import styles from './Styles/RootContainerStyles'
+import { apply } from '../Lib/OsmiProvider'
 
 class RootContainer extends Component {
   componentDidMount () {
@@ -19,7 +20,7 @@ class RootContainer extends Component {
   render () {
     return (
       <View style={styles.applicationView}>
-        <StatusBar barStyle='light-content' />
+        <StatusBar backgroundColor={apply("blue-500")} barStyle='light-content' />
         <ReduxNavigation />
       </View>
     )

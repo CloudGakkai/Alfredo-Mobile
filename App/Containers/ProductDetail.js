@@ -75,37 +75,37 @@ const ProductDetail = props => {
   return (
     <SafeAreaView style={apply('bg-gray-100 flex')}>
       <StatusBar backgroundColor={apply("blue-500")} barStyle='light-content' />
-      <KeyboardAvoidingView style={apply('flex')} behavior={OS === "ios" ? "padding" : null}>
+
         {detail?.fetching ? (
           <View style={styles.loading}>
             <ActivityIndicator size="large" color={apply('gray-900')} />
           </View>
         ) : (
-          <>
-          <ScrollView showsVerticalScrollIndicator={false} style={styles.content}>
-            <Image style={{width: width, height: width}} resizeMode='cover' source={{ uri: data.thumbnail }} />
-            <View style={styles.detailSec}>
-              <Text style={styles.price}>Rp{formatMoney(data?.price ?? 0)}</Text>
-              <Text style={styles.title}>{data.title}</Text>
-              <Text style={styles.stock}>Stock: {data.stock} pcs</Text>
+          <KeyboardAvoidingView style={apply('flex')} behavior={OS === "ios" ? "padding" : null}>
+            <ScrollView showsVerticalScrollIndicator={false} style={styles.content}>
+              <Image style={{width: width, height: width}} resizeMode='cover' source={{ uri: data.thumbnail }} />
+              <View style={styles.detailSec}>
+                <Text style={styles.price}>Rp{formatMoney(data?.price ?? 0)}</Text>
+                <Text style={styles.title}>{data.title}</Text>
+                <Text style={styles.stock}>Stock: {data.stock} pcs</Text>
+              </View>
+              <View style={styles.descSec}>
+                <Text style={styles.descTitle}>Description :</Text>
+                <Text style={styles.desc}>{data.desc}</Text>
+              </View>
+            </ScrollView>
+
+            <View style={OS === 'ios' ? styles.iosFooter : styles.footer}>
+              <View style={styles.qty}>
+                <Text style={styles.qtyLabel}>Qty: </Text>
+                <Button text='-' style={styles.btnQty} onPress={() => onMin()} />
+                <TextInput style={styles.qtyInput} maxLength={4} onChangeText={(value) => onChange(value)} keyboardType='numeric' value={qty.toString()} underlineColorAndroid={apply('gray-500')} />
+                <Button text='+' style={styles.btnQty} onPress={() => onPlus()} />
+              </View>
+              <Button text='BUY NOW' onPress={() => onBuy()} style={styles.btnBuy} textStyle={styles.btnBuyLabel}/>
             </View>
-            <View style={styles.descSec}>
-              <Text style={styles.descTitle}>Description :</Text>
-              <Text style={styles.desc}>{data.desc}</Text>
-            </View>
-          </ScrollView>
-          <View style={OS === 'ios' ? styles.iosFooter : styles.footer}>
-            <View style={styles.qty}>
-              <Text style={styles.qtyLabel}>Qty: </Text>
-              <Button text='-' style={styles.btnQty} onPress={() => onMin()} />
-              <TextInput style={styles.qtyInput} maxLength={4} onChangeText={(value) => onChange(value)} keyboardType='numeric' value={qty.toString()} underlineColorAndroid={apply('gray-500')} />
-              <Button text='+' style={styles.btnQty} onPress={() => onPlus()} />
-            </View>
-            <Button text='BUY NOW' onPress={() => onBuy()} style={styles.btnBuy} textStyle={styles.btnBuyLabel}/>
-          </View>
-          </>
+          </KeyboardAvoidingView>
         )}
-      </KeyboardAvoidingView>
     </SafeAreaView>
   )
 }

@@ -42,7 +42,7 @@ const Invoice = (props) => {
   useEffect(() => {
     props.showInvoice(inv)
   }, [])
-  
+
   const status = data?.status.replace('_', ' ')
   const price = formatMoney(data?.total ?? 0)
 
@@ -127,12 +127,12 @@ const Invoice = (props) => {
             <Text style={status == 'done' ? [styles.status, apply('bg-green-500')] : styles.status}>{status.toUpperCase()}</Text>
             {status == 'done' ? <View /> : <Text style={styles.alert}><Text style={apply("text-red-500")}>*</Text>Pastikan jumlah nominal yang ditransfer sama seperti yang tercantum di atas.</Text>}
           </View>
-          {status == 'done' ? <View /> : 
+          {status == 'done' ? <View /> :
             <View>
               <View style={styles.pay}>
                 <Text>Transfer Pembayaran ke:</Text>
                 <Image source={Images.bca} resizeMode="cover" />
-                <Text style={styles.rekening}>80770822619 (Edo Rahayu)</Text>
+                <Text style={styles.rekening}>1234567890 (CloudGakkai)</Text>
               </View>
               <View style={styles.panduanBox}>
                 <Text style={styles.panduanTitle}>Petunjuk Pembayaran</Text>

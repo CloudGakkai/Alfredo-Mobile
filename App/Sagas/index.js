@@ -6,7 +6,6 @@ import DebugConfig from '../Config/DebugConfig'
 /* ------------- Types ------------- */
 
 import { StartupTypes } from '../Redux/StartupRedux'
-import { GithubTypes } from '../Redux/GithubRedux'
 import { ProductsTypes } from "../Redux/ProductsRedux"
 import { CategoryTypes } from "../Redux/CategoryRedux"
 import { SessionTypes } from '../Redux/SessionRedux'

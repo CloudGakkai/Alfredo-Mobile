@@ -10,7 +10,6 @@ import Account from '../Containers/Account'
 import Products from '../Containers/Products'
 import Home from '../Containers/Home'
 import { createStackNavigator } from 'react-navigation-stack';
-import LaunchScreen from '../Containers/LaunchScreen'
 import BottomNavigation from "./BottomNavigation";
 
 import styles from './Styles/NavigationStyles'
