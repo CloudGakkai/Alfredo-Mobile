@@ -19,7 +19,7 @@ import { ConfirmPaymentTypes } from '../Redux/ConfirmPaymentRedux'
 
 import { startup } from './StartupSagas'
 import { getProducts, moreProducts, getDetail } from "./ProductsSagas"
-import { getCategory } from "./CategorySagas"
+import { getCategory, showCategory } from "./CategorySagas"
 import { doLogin, doRegister, doLogout } from './AuthSagas'
 import { getProfile } from './SessionSagas'
 import { getInvoice, moreInvoice, showInvoice } from './InvoiceSagas'
@@ -41,8 +41,10 @@ export default function * root () {
 
     takeLatest(ProductsTypes.GET_PRODUCTS_REQUEST, getProducts, api),
     takeLatest(ProductsTypes.MORE_PRODUCTS_REQUEST, moreProducts, api),
-    takeLatest(CategoryTypes.GET_CATEGORY_REQUEST, getCategory, api),
     takeLatest(ProductsTypes.GET_DETAIL_REQUEST, getDetail, api),
+
+    takeLatest(CategoryTypes.GET_CATEGORY_REQUEST, getCategory, api),
+    takeLatest(CategoryTypes.SHOW_CATEGORY_REQUEST, showCategory, api),
 
     takeLatest(AuthTypes.DO_LOGIN_REQUEST, doLogin, api),
     takeLatest(AuthTypes.DO_REGISTER_REQUEST, doRegister, api),

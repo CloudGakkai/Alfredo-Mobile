@@ -2,12 +2,11 @@ import React, { useState, useEffect } from 'react'
 import {
   SafeAreaView,
   ActivityIndicator,
-  TouchableOpacity,
   RefreshControl,
   FlatList,
-  Image,
   View,
-  Text
+  Text,
+  StatusBar
 } from 'react-native'
 import { connect } from "react-redux";
 import ProductsActions from "../Redux/ProductsRedux";
@@ -53,6 +52,7 @@ const Home = props => {
 
   return (
     <SafeAreaView style={apply('flex bg-gray-100')}>
+      <StatusBar backgroundColor={apply("blue-500")} barStyle='light-content' />
       {products?.fetching ? (
         <View style={styles.emptyState}>
           <ActivityIndicator size="large" color={apply('gray-900')} />
@@ -108,6 +108,7 @@ Home.navigationOptions = ({ navigation }) => {
   return {
     headerStyle: HeaderStyle.default,
     headerTitle: 'Home',
+    headerTitleStyle: apply("text-center"),
     headerLayoutPreset: 'center'
   }
 }

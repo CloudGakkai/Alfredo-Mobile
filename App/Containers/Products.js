@@ -1,5 +1,15 @@
 import React, {useEffect, useState} from 'react'
-import { SafeAreaView, ActivityIndicator, RefreshControl, FlatList, Image, View, Text } from 'react-native'
+import {
+  SafeAreaView,
+  ActivityIndicator,
+  RefreshControl,
+  FlatList,
+  Image,
+  StatusBar,
+  View,
+  Text,
+  TouchableOpacity
+} from 'react-native'
 import { connect } from 'react-redux'
 import CategoryActions from "../Redux/CategoryRedux";
 
@@ -21,17 +31,18 @@ const Products = props => {
   }
 
   const renderItem = ({ item, index }) => (
-    <View style={styles.card}>
-      <Image source={{ uri: item.thumbnail }} style={styles.thumb} />
+    <TouchableOpacity activeOpacity={0.9} onPress={() => props.navigation.navigate('CategoryScreen', {slug: item?.slug, title: item?.title})} style={styles.card}>
+      <Image source={{ uri: item?.thumbnail }} style={styles.thumb} />
       <View style={styles.content}>
-        <Text style={styles.title}>{item.title}</Text>
-        <Text style={styles.desc}>{item.desc.substr(0, 79)}...</Text>
+        <Text style={styles.title}>{item?.title}</Text>
+        <Text style={styles.desc}>{item?.desc.substr(0, 79)}...</Text>
       </View>
-    </View>
+    </TouchableOpacity>
   )
 
   return (
     <SafeAreaView style={apply('bg-gray-100 flex')}>
+      <StatusBar backgroundColor={apply("blue-500")} barStyle='light-content' />
       {category?.fetching ? (
         <View style={apply('flex justify-center items-center')}>
           <ActivityIndicator size="large" color={apply('gray-900')} />
@@ -70,7 +81,9 @@ Products.navigationOptions = ({ navigation }) => {
 
   return {
     headerStyle: HeaderStyle.default,
-    headerTitle: navigation.getParam('title', 'Category'),
+    headerTitle: 'Category',
+    headerTitleStyle: apply("text-center"),
+    headerLayoutPreset: 'center'
   }
 }
 

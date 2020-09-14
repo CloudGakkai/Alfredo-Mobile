@@ -1,5 +1,15 @@
 import React, {useEffect, useState} from 'react'
-import { SafeAreaView, FlatList, View, TouchableOpacity, RefreshControl, Text, ActivityIndicator, Platform } from 'react-native'
+import {
+  SafeAreaView,
+  FlatList,
+  View,
+  TouchableOpacity,
+  RefreshControl,
+  Text,
+  ActivityIndicator,
+  StatusBar,
+  Platform
+} from 'react-native'
 import { connect } from 'react-redux'
 import ArrowBack from '../Components/ArrowBack'
 
@@ -52,6 +62,7 @@ const OrderList = (props) => {
 
   return (
     <SafeAreaView style={apply('flex py-1')}>
+      <StatusBar backgroundColor={apply("blue-500")} barStyle='light-content' />
       {list.fetching ? (
         <View style={styles.emptyState}>
           <ActivityIndicator size="large" color={apply('black')} />
