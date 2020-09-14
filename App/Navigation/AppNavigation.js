@@ -17,7 +17,6 @@ import styles from './Styles/NavigationStyles'
 
 // Manifest of possible screens
 const PrimaryNav = createStackNavigator({
-  CategoryScreen: { screen: CategoryScreen },
   Main: {
     screen: BottomNavigation,
     navigationOptions: ({navigation}) => ({
@@ -33,6 +32,7 @@ const PrimaryNav = createStackNavigator({
   Invoice: { screen: Invoice },
   OrderList: { screen: OrderList },
   ConfirmPayment: { screen: ConfirmPayment },
+  CategoryScreen: { screen: CategoryScreen },
 }, {
   // Default config for all screens
   initialRouteName: 'Main',

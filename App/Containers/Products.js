@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import { SafeAreaView, ActivityIndicator, RefreshControl, FlatList, Image, View, Text } from 'react-native'
+import { SafeAreaView, ActivityIndicator, RefreshControl, FlatList, Image, View, Text, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
 import CategoryActions from "../Redux/CategoryRedux";
 
@@ -21,13 +21,13 @@ const Products = props => {
   }
 
   const renderItem = ({ item, index }) => (
-    <View style={styles.card}>
-      <Image source={{ uri: item.thumbnail }} style={styles.thumb} />
+    <TouchableOpacity activeOpacity={0.9} onPress={() => props.navigation.navigate('CategoryScreen', {slug: item?.slug, title: item?.title})} style={styles.card}>
+      <Image source={{ uri: item?.thumbnail }} style={styles.thumb} />
       <View style={styles.content}>
-        <Text style={styles.title}>{item.title}</Text>
-        <Text style={styles.desc}>{item.desc.substr(0, 79)}...</Text>
+        <Text style={styles.title}>{item?.title}</Text>
+        <Text style={styles.desc}>{item?.desc.substr(0, 79)}...</Text>
       </View>
-    </View>
+    </TouchableOpacity>
   )
 
   return (
@@ -70,7 +70,7 @@ Products.navigationOptions = ({ navigation }) => {
 
   return {
     headerStyle: HeaderStyle.default,
-    headerTitle: navigation.getParam('title', 'Category'),
+    headerTitle: 'Category'
   }
 }
 

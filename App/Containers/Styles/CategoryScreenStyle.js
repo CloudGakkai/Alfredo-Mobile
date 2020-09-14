@@ -1,10 +1,5 @@
-import { StyleSheet } from 'react-native'
-import { Colors, Metrics } from '../../Themes/'
+import { connect } from "../../Lib/OsmiProvider"
 
-export default StyleSheet.create({
-  container: {
-    flex: 1,
-    marginTop: Metrics.navBarHeight,
-    backgroundColor: Colors.background
-  }
+export default connect({
+  emptyState: "flex items-center justify-center column"
 })

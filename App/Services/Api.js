@@ -25,6 +25,7 @@ const create = (baseURL = 'https://api.alfredo.my.id/api/v1') => {
 
   // category
   const getCategory = data => api.get(`/category`)
+  const showCategory = data => api.get(`/category/${data}`)
 
   // profile
   const getProfile = data => api.get(`account/profile`)
@@ -50,6 +51,7 @@ const create = (baseURL = 'https://api.alfredo.my.id/api/v1') => {
 
     // category
     getCategory,
+    showCategory,
 
     // profile
     getProfile,
