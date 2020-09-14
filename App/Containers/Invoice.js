@@ -14,6 +14,7 @@ import { connect } from 'react-redux'
 import ArrowBack from '../Components/ArrowBack'
 import Images from '../Themes/Images'
 import Collapsible from 'react-native-collapsible'
+import Icon from 'react-native-vector-icons/Feather'
 
 import InvoiceActions from '../Redux/InvoiceRedux'
 
@@ -124,10 +125,10 @@ const Invoice = (props) => {
           <View style={styles.secA}>
             <Text style={styles.price}>Rp{price}</Text>
             <Text style={status == 'done' ? [styles.status, apply('bg-green-500')] : styles.status}>{status.toUpperCase()}</Text>
+            {status == 'done' ? <View /> : <Text style={styles.alert}><Text style={apply("text-red-500")}>*</Text>Pastikan jumlah nominal yang ditransfer sama seperti yang tercantum di atas.</Text>}
           </View>
           {status == 'done' ? <View /> : 
             <View>
-              <Text style={styles.alert}>Pastikan jumlah nominal yang ditransfer sama seperti yang tercantum di atas.</Text>
               <View style={styles.pay}>
                 <Text>Transfer Pembayaran ke:</Text>
                 <Image source={Images.bca} resizeMode="cover" />
@@ -137,7 +138,10 @@ const Invoice = (props) => {
                 <Text style={styles.panduanTitle}>Petunjuk Pembayaran</Text>
                 <View style={styles.panduan}>
                   <TouchableOpacity style={styles.collapse} onPress={() => atmClick()}>
-                    <Text style={styles.panduanLabel}>Melalui ATM</Text>
+                    <View style={styles.panduanLabelParent}>
+                      <Text style={styles.panduanLabel}>Melalui ATM</Text>
+                      <Icon color={apply("gray-500")} style={apply("flex-end")} name={atm ? "chevron-right" : "chevron-down"} size={20} />
+                    </View>
                     <Collapsible style={apply("pt-2")} collapsed={atm}>
                       {panduan.atm.map((item, index) => (
                         <Text key={index}>{item}</Text>
@@ -147,7 +151,10 @@ const Invoice = (props) => {
                 </View>
                 <View style={styles.panduan}>
                   <TouchableOpacity style={styles.collapse} onPress={() => mbcaClick()}>
-                    <Text style={styles.panduanLabel}>m-BCA (BCA Mobile)</Text>
+                    <View style={styles.panduanLabelParent}>
+                      <Text style={styles.panduanLabel}>m-BCA (BCA Mobile)</Text>
+                      <Icon color={apply("gray-500")} style={apply("flex-end")} name={mbca ? "chevron-right" : "chevron-down"} size={20} />
+                    </View>
                     <Collapsible style={apply("pt-2")} collapsed={mbca}>
                       {panduan.mbca.map((item, index) => (
                         <Text key={index}>{item}</Text>
@@ -157,7 +164,10 @@ const Invoice = (props) => {
                 </View>
                 <View style={styles.panduan}>
                   <TouchableOpacity style={styles.collapse} onPress={() => ibankClick()}>
-                    <Text style={styles.panduanLabel}>Internet Banking</Text>
+                    <View style={styles.panduanLabelParent}>
+                      <Text style={styles.panduanLabel}>Internet Banking</Text>
+                      <Icon color={apply("gray-500")} style={apply("flex-end")} name={ibank ? "chevron-right" : "chevron-down"} size={20} />
+                    </View>
                     <Collapsible style={apply("pt-2")} collapsed={ibank}>
                       {panduan.ibank.map((item, index) => (
                         <Text key={index}>{item}</Text>
