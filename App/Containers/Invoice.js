@@ -53,7 +53,7 @@ const Invoice = (props) => {
       '3. Pilih "Transfer"',
       '4. Pilih "Ke Rek Bank Lain"',
       '5. Masukkan kode bank 014',
-      '6. Masukkan nomor rekening tujuan 80770822619',
+      '6. Masukkan nomor rekening tujuan 1234567890',
       '7. Masukkan jumlah transfer Rp' + price,
       '8. Baca kembali detail pembayaran dan konfirmasi transaksi'
     ],
@@ -61,7 +61,7 @@ const Invoice = (props) => {
       '1. Log in pada aplikasi BCA Mobile',
       '2. Pilih menu m-BCA, kemudian masukkan kode akses m-BCA',
       '3. Pilih "m-Transfer" kemudian "Daftar Transfer - Antar Rekening"',
-      '4. Masukkan nomor rekening 80770822619',
+      '4. Masukkan nomor rekening 1234567890',
       '5. Klik "Send" dan masukkan PIN untuk mendaftarkan nomor rekening tujuan anda',
       '6. Pilih "Transfer - Antar Rekening"',
       '7. Pilih nomor rekening tujuan',
@@ -73,7 +73,7 @@ const Invoice = (props) => {
       '2. Pilih menu "Transfer"',
       '3. Lalu pilih "Ke Bank Lain"',
       '4. Masukkan kode bank 014',
-      '5. Masukkan rekening tujuan 80770822619',
+      '5. Masukkan rekening tujuan 1234567890',
       '6. Masukkan jumlah transfer Rp' + price,
       '7. Klik Lanjut',
       '8. Periksa kembali transaksi, kemudian klik Kirim'
