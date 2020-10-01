@@ -153,15 +153,9 @@ const RegisterScreen = (props) => {
               value={formProps.values.confirm}
               style={styles.inputText}
             />
-            {isSecure2 ? (
-              <TouchableOpacity onPress={() => setIsSecure2(false)}>
-                <Icon name="eye" size={20} />
-              </TouchableOpacity>
-            ) : (
-              <TouchableOpacity onPress={() => setIsSecure2(true)}>
-                <Icon name="eye-off" size={20} />
-              </TouchableOpacity>
-            )}
+            <TouchableOpacity onPress={() => setIsSecure(isSecure ? false : true)}>
+              <Icon name={isSecure ? 'eye' : 'eye-off'} size={20} />
+            </TouchableOpacity>
           </View>
           <Text style={styles.error}>{formProps?.errors?.confirm}</Text>
           <View style={styles.check}>
