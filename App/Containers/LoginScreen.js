@@ -76,15 +76,9 @@ const LoginScreen = (props) => {
               value={formProps.values.password}
               style={styles.inputText}
             />
-            {isSecure ? (
-              <TouchableOpacity onPress={() => setIsSecure(false)}>
-                <Icon name="eye" size={20} />
-              </TouchableOpacity>
-            ) : (
-              <TouchableOpacity onPress={() => setIsSecure(true)}>
-                <Icon name="eye-off" size={20} />
-              </TouchableOpacity>
-            )}
+            <TouchableOpacity onPress={() => setIsSecure(isSecure ? false : true)}>
+              <Icon name={isSecure ? 'eye' : 'eye-off'} size={20} />
+            </TouchableOpacity>
           </View>
           <Text style={styles.error}>{formProps?.errors?.password}</Text>
           <TouchableOpacity
